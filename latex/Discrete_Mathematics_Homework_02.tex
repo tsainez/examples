@@ -1,0 +1,167 @@
+\documentclass[11pt]{article}
+
+% To produce a letter size output. Otherwise will be A4 size.
+\usepackage[letterpaper]{geometry}
+
+% For enumerated lists using letters: a. b. etc.
+\usepackage{enumitem}
+
+\topmargin -.5in
+\textheight 9in
+\oddsidemargin -.25in
+\evensidemargin -.25in
+\textwidth 7in
+
+\begin{document}
+
+% Edit the following putting your first and last names and your lab section.
+\author{Anthony Sainez\\
+Lab CSE-015-03L W 10:30-1:20pm}
+
+% Edit the following replacing X with the HW number.
+\title{CSE 015: Discrete Mathematics\\
+Fall 2019\\
+Homework \#2\\
+Solution}
+
+% Put today's date in the following.
+\date{October 11, 2019}
+\maketitle
+
+% ========== Begin questions here
+\begin{enumerate}
+
+\item
+\textbf{Question 1:}
+
+\begin{enumerate}[label=(\alph*)]
+\item
+For all animals such that if it is a rabbit, then it hops.
+
+\item
+For all animals, given it is a rabbit, and it hops.
+
+\item
+There exists an animal, such that if it is a rabbit, then it hops.
+
+\item
+There exists an animal, such that it is a rabbit, and x hops.
+
+\end{enumerate}
+
+\item
+\textbf{Question 2:}
+
+\begin{enumerate}[label=(\alph*)]
+\item
+True, since $\sqrt{2}$ is a real number.
+
+\item
+False, since $i=\sqrt{-1}$ is not real.
+
+\item
+True, since $x^2 \geq 0$
+
+\item
+False. Take the counter example $x=0$ and $x=1$
+
+\end{enumerate}
+
+\item
+\textbf{Question 3:}
+
+In each case, $Q(x)$ is defined as "x is a student in your class" 
+
+\begin{enumerate}[label=(\alph*)]
+\item 
+$\forall x P(x)$ and $\exists x (Q(x) \land P(x))$
+\\ where $P(x)$ is "x has a cell phone."
+
+\item
+$\exists x P(x)$ and $\exists x (Q(x) \land P(x))$
+\\ where $P(x)$ is "x has seen a foreign movie."
+
+\item
+$\exists x \lnot P(x)$ and $\exists x (Q(x) \land \lnot P(x))$
+\\ where $P(x)$ is "x can swim."
+
+\item
+$\forall x P(x)$ and $\exists x (Q(x) \land P(x))$
+\\ where $P(x)$ is "x can solve quadratic equations."
+
+\end{enumerate}
+
+\item
+\textbf{Question 4:}
+
+\begin{enumerate}[label=(\alph*)]
+\item
+There exists a student in your class who has taken a computer science course. 
+
+\item
+Every student in your class has taken at least one computer science course.
+
+\item
+Every computer science course has been taken by some student in your class. Alternatively, you can say that there is at least one student in your class who has taken all the computer science courses at your school. 
+\end{enumerate}
+
+\item
+\textbf{Question 5:}
+
+\begin{enumerate}[label=(\alph*)]
+\item
+$\exists x \exists y Q(x, y)$
+
+\item
+$\forall x \forall y \lnot Q(x, y)$
+
+\end{enumerate}
+
+\item
+\textbf{Question 6:}
+
+\begin{enumerate}[label=(\alph*)]
+\item
+$\forall x \exists y F(x, y)$
+
+\item
+$\lnot \exists x \forall y F(x, y)$ or $\forall x \exists y \lnot F(x, y)$
+
+\item
+$\exists x \forall y  F(x, y)$
+
+\end{enumerate}
+
+\item
+\textbf{Question 7:}
+
+\begin{enumerate}[label=(\alph*)]
+\item
+$\forall x \forall y [(x < 0 \land y < 0) \rightarrow xy > 0]$
+
+\item
+$\forall x \forall y [(x > 0 \land y > 0) \rightarrow \frac{x + y}{2} > 0]$
+
+\item
+$\forall x \forall y (\left| x + y \right| \leq \left| x \right| + \left| y \right|) $
+
+\end{enumerate}
+
+\item
+\textbf{Question 8:}
+
+\begin{enumerate}[label=(\alph*)]
+\item
+False, because if $x=-1$, then there does not exist a real number $y$ such that $x=y^2$. Recall that $\sqrt{-1}$ is not a real number.
+
+\item
+True. For every real number there exists another real number such that their sum equals $1$. There is no counter-example. 
+
+\item
+False. The statement essentially asks that we find the two real numbers that solve the system of equations $x + 2y = 2$ and $2x +4y = 5$. In slope intercept form, these lines can be written as $y=-\frac{1}{2}x + 1$ and $y=-\frac{1}{2}x + \frac{5}{4}$. These lines have the same slope and will never intercept, so they will never share an x and a y, and the system of equations does not have a solution. 
+
+\end{enumerate}
+
+\end{enumerate}
+
+\end{document}
