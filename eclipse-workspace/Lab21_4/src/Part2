@@ -1,8 +1,0 @@
-1) I copied the formula for calculating the discount for Red Hawk cheese from Lab 2
-2) I copied nothing else from Lab 3
-3) Most if not all of the code is the same other than rearranging the entire project into methods
-4) 	i)	no because it will be accept an array of type double for the second parameter (it will be expecting a int array)
-	ii)	no because it will be accept an array of type double for the second parameter (it will be expecting a int array)
-	iii)yes it would work because both parameters are going to be filled with the correct type of array. The name of the arrays do not matter
-	iv)	no because it will be accept an array of type double for the first parameter (it will be expecting a int array)
-	v)	no because it will be accept an array of type double for the second parameter (it will be expecting a int array)
