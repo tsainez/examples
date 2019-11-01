@@ -1,0 +1,9 @@
+1) I used 7 variables not including the Scanner object
+2) I used doubles and integers (again not including the scanner object).
+3) Variables that were going to have to hold values that would be between whole numbers such as price or half pounds would have to be
+doubles, everything else that would end up being a whole number could be declared as an integer.
+4) the print function is going to output to the console and will end on the same line that it started on.
+println will end the print statement with a new line
+5)Yes I used both print and println. print is better when prompting user input because the cursor is going to be on the same line as the prompt
+println is going to be better for displaying non prompt lines because it helps with format
+6) the line System.out.println(); is going to begin a newline

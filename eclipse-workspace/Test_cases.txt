@@ -1,0 +1,46 @@
+I-1
+Enter 3 to create 3 items in shop  
+I-2
+a)
+b)
+c)
+Enter  “Alpha”   for the name, 20 for the price, and 1 for the Special Discount for the first item
+Enter “Beta”  for the name, 30 for the price, and 2 for the Special discount for the second item
+Enter  “Charlie” for the name, 40 for the price, 3 for the special Discount, for the third item
+I-3
+a)
+b)
+
+Enter a number   100 for the dollar threshold
+Enter  .6, then .3 for the discount rate
+I-4
+Enter 1 after shop is setup and/or bought
+II-1
+III-1
+IV-1
+Enter 2 before 1;  program prompts user to setup  shop first and displays the menu again
+Enter 3 before 1;  program prompts user to setup  shop first and displays the menu again
+Enter 4 before 1;  program prompts user to setup  shop first and displays the menu again
+II-2
+Enter an amount less than zero. Then order 5 of each item
+II-3
+Ordered 5 of item 1 first time but did not purchase when ordering again, checked the output items to make sure it’s 0 instead of 5 (no corruption of the orders) 
+
+III-2
+IV-2
+III-3
+
+Enter 1 to set up the shop, then  enter 3; program will prompt user to purchase items before listing
+Enter 1 to setup shop, then 4; program should prompt user to purchase items before checkout
+Enter 2 to purchase, then enter 3 to list items purchased, items with orders of 0 should not be displayed
+IV-3
+a)
+b)
+c)
+d) 
+e)
+
+Enter 4 after shop is setup and items are bought
+IV-4
+Enter 1 to repeat program
+

@@ -1,0 +1,271 @@
+(Sample Run 1):
+This program supports 4 functions:
+	1. Setup shop
+	2. Buy
+	3. List items
+	4. Checkout
+Please choose the function you want:	1
+
+Please enter the number of items to set up shop:	3
+
+Enter the name of the 1st product:	Alpha
+Enter the per package price of Alpha:	20
+Enter the number of packages ('x') to qualify for Special Discount (buy 'x' get 1 free) for Alpha, or 0 if no Special Discount offered:	1
+
+Enter the name of the 2nd product:	Beta
+Enter the per package price of Beta:	30
+Enter the number of packages ('x') to qualify for Special Discount (buy 'x' get 1 free) for Beta, or 0 if no Special Discount offered:	2
+
+Enter the name of the 3rd product:	Charlie
+Enter the per package price of Charlie:	40
+Enter the number of packages ('x') to qualify for Special Discount (buy 'x' get 1 free) for Charlie, or 0 if no Special Discount offered:	3
+
+Enter the dollar amount to qualify for additional discount (or 0 if none offered):	100
+Enter the Additional Discount Rate (e.g., 0.1 for 10%):	.6
+Invalid input. Enter a value > 0 and <= 0.5:	.3
+
+This program supports 4 functions:
+	1. Setup shop
+	2. Buy
+	3. List items
+	4. Checkout
+Please choose the function you want:	1
+
+Please enter the number of items to set up shop:	1
+
+Enter the name of the 1st product:	Delta
+Enter the per package price of Delta:	10
+Enter the number of packages ('x') to qualify for Special Discount (buy 'x' get 1 free) for Delta, or 0 if no Special Discount offered:	0
+
+Enter the dollar amount to qualify for additional discount (or 0 if none offered):	0
+
+This program supports 4 functions:
+	1. Setup shop
+	2. Buy
+	3. List items
+	4. Checkout
+Please choose the function you want:	2
+
+Enter the number of Delta packages you would like to buy:	1
+
+This program supports 4 functions:
+	1. Setup shop
+	2. Buy
+	3. List items
+	4. Checkout
+Please choose the function you want:	4
+
+Original Sub Total:		$10.00
+No Special Discounts applied
+New Sub Total:			$10.00
+You did not qualify for an Additional Discount
+Final Sub Total:		$10.00
+
+Thanks for coming!
+
+-------------------------------------------------
+Would you like to rerun (1 for yes, 0 for no)?	
+
+(Sample Run 2):
+
+This program supports 4 functions:
+	1. Setup shop
+	2. Buy
+	3. List items
+	4. Checkout
+Please choose the function you want:	2
+
+Shop is not set up yet!
+
+This program supports 4 functions:
+	1. Setup shop
+	2. Buy
+	3. List items
+	4. Checkout
+Please choose the function you want:	3
+
+Shop is not set up yet!
+
+This program supports 4 functions:
+	1. Setup shop
+	2. Buy
+	3. List items
+	4. Checkout
+Please choose the function you want:	4
+
+Shop is not set up yet!
+
+This program supports 4 functions:
+	1. Setup shop
+	2. Buy
+	3. List items
+	4. Checkout
+Please choose the function you want:	1
+
+Please enter the number of items to set up shop:	3
+
+Enter the name of the 1st product:	Alpha
+Enter the per package price of Alpha:	20
+Enter the number of packages ('x') to qualify for Special Discount (buy 'x' get 1 free) for Alpha, or 0 if no Special Discount offered:	1
+
+Enter the name of the 2nd product:	Beta
+Enter the per package price of Beta:	30
+Enter the number of packages ('x') to qualify for Special Discount (buy 'x' get 1 free) for Beta, or 0 if no Special Discount offered:	2
+
+Enter the name of the 3rd product:	Charlie
+Enter the per package price of Charlie:	40
+Enter the number of packages ('x') to qualify for Special Discount (buy 'x' get 1 free) for Charlie, or 0 if no Special Discount offered:	3
+
+Enter the dollar amount to qualify for additional discount (or 0 if none offered):	100
+Enter the Additional Discount Rate (e.g., 0.1 for 10%):	.6
+Invalid input. Enter a value > 0 and <= 0.5:	.3
+
+This program supports 4 functions:
+	1. Setup shop
+	2. Buy
+	3. List items
+	4. Checkout
+Please choose the function you want:	2
+
+Enter the number of Alpha packages you would like to buy:	5
+Enter the number of Beta packages you would like to buy:	5
+Enter the number of Charlie packages you would like to buy:	5
+
+This program supports 4 functions:
+	1. Setup shop
+	2. Buy
+	3. List items
+	4. Checkout
+Please choose the function you want:	2
+
+Enter the number of Alpha packages you would like to buy:	0
+Enter the number of Beta packages you would like to buy:	1
+Enter the number of Charlie packages you would like to buy:	0
+
+This program supports 4 functions:
+	1. Setup shop
+	2. Buy
+	3. List items
+	4. Checkout
+Please choose the function you want:	4
+
+Original Sub Total:		$30.00
+No Special Discounts applied
+New Sub Total:			$30.00
+You did not qualify for an Additional Discount
+Final Sub Total:		$30.00
+
+Thanks for coming!
+
+-------------------------------------------------
+Would you like to rerun (1 for yes, 0 for no)?	
+
+(Sample Run 3):
+
+This program supports 4 functions:
+	1. Setup shop
+	2. Buy
+	3. List items
+	4. Checkout
+Please choose the function you want:	1
+
+Please enter the number of items to set up shop:	3
+
+Enter the name of the 1st product:	Alpha
+Enter the per package price of Alpha:	20
+Enter the number of packages ('x') to qualify for Special Discount (buy 'x' get 1 free) for Alpha, or 0 if no Special Discount offered:	1
+
+Enter the name of the 2nd product:	Beta
+Enter the per package price of Beta:	30
+Enter the number of packages ('x') to qualify for Special Discount (buy 'x' get 1 free) for Beta, or 0 if no Special Discount offered:	2
+
+Enter the name of the 3rd product:	Charlie
+Enter the per package price of Charlie:	40
+Enter the number of packages ('x') to qualify for Special Discount (buy 'x' get 1 free) for Charlie, or 0 if no Special Discount offered:	3
+
+Enter the dollar amount to qualify for additional discount (or 0 if none offered):	100
+Enter the Additional Discount Rate (e.g., 0.1 for 10%):	.3
+
+This program supports 4 functions:
+	1. Setup shop
+	2. Buy
+	3. List items
+	4. Checkout
+Please choose the function you want:	3
+
+No items were purchased.
+
+This program supports 4 functions:
+	1. Setup shop
+	2. Buy
+	3. List items
+	4. Checkout
+Please choose the function you want:	4
+
+You haven't bought anything!
+
+This program supports 4 functions:
+	1. Setup shop
+	2. Buy
+	3. List items
+	4. Checkout
+Please choose the function you want:	2
+
+Enter the number of Alpha packages you would like to buy:	-2
+Invalid input. Enter a value >= 0:	5
+Enter the number of Beta packages you would like to buy:	5
+Enter the number of Charlie packages you would like to buy:	-1
+Invalid input. Enter a value >= 0:	5
+
+This program supports 4 functions:
+	1. Setup shop
+	2. Buy
+	3. List items
+	4. Checkout
+Please choose the function you want:	4
+
+Original Sub Total:		$450.00
+Special Discounts:		-$110.00
+New Sub Total:			$340.00
+Additional 30.0 Discount:	-$102.00
+Final Sub Total:		$238.00
+
+Thanks for coming!
+
+-------------------------------------------------
+Would you like to rerun (1 for yes, 0 for no)?	1
+-------------------------------------------------
+
+This program supports 4 functions:
+	1. Setup shop
+	2. Buy
+	3. List items
+	4. Checkout
+Please choose the function you want:	4
+
+Shop is not set up yet!
+
+This program supports 4 functions:
+	1. Setup shop
+	2. Buy
+	3. List items
+	4. Checkout
+Please choose the function you want:	3
+
+Shop is not set up yet!
+
+This program supports 4 functions:
+	1. Setup shop
+	2. Buy
+	3. List items
+	4. Checkout
+Please choose the function you want:	2
+
+Shop is not set up yet!
+
+This program supports 4 functions:
+	1. Setup shop
+	2. Buy
+	3. List items
+	4. Checkout
+Please choose the function you want:	
