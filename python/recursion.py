@@ -1,3 +1,10 @@
+#
+#  recursion.py
+#
+#  Created by Anthony Sainez on 22 January 2020
+#  Copyright © 2020 Anthony Sainez. All rights reserved.
+#
+
 import sys
 sys.setrecursionlimit(100000)
 
@@ -39,6 +46,3 @@ print('addup([1,2,3,4,5]):', addup([1,2,3,4,5]))
 # Expected 15
 print('addup(range(101)):', addup(range(101)))
 # Expected 5050
-
-
-

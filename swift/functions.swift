@@ -1,8 +1,8 @@
 //
 //  functions.swift
 //
-//  Created by Anthony Sainez on 3/13/19.
-//  Copyright © 2019 Anthony Sainez. All rights reserved.
+//  Created by Anthony Sainez on 13 March 2019.
+//  Copyright © 2020 Anthony Sainez. All rights reserved.
 //
 
 import Foundation

@@ -1,3 +1,10 @@
+//
+//  EncapsulatedArray.cpp
+//
+//  Created by Anthony Sainez on 1 November 2019
+//  Copyright © 2020 Anthony Sainez. All rights reserved.
+//
+
 #include <iostream>
 using namespace std;
 

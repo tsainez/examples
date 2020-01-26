@@ -1,3 +1,10 @@
+#
+#  integer-classification.py
+#
+#  Created by Anthony Sainez on 11 October 2019
+#  Copyright © 2020 Anthony Sainez. All rights reserved.
+#
+
 # problem 1, modified hello world
 print("Problem #1\n")
 name = input("What's your name?\n")

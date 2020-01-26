@@ -1,3 +1,10 @@
+//
+//  DoubleLinkedEndedPriorityQueue.cpp
+//
+//  Created by Anthony Sainez on 1 November 2019
+//  Copyright © 2020 Anthony Sainez. All rights reserved.
+//
+
 #include <iostream>
 using namespace std;
 
@@ -7,7 +14,7 @@ class DoubleEndedList {
 	Link *pLast; // ptr to first link on list
 
 	public:
-	DoubleEndedList() {pFirst = NULL; pLast = NULL; } // nothing on the list yet'=
+	DoubleEndedList() {pFirst = NULL; pLast = NULL; } // nothing on the list yet
 	void displayFirst() { cout << "First: "; pFirst->display(); }
 	void displayLast() 	{ cout << "Last: "; pLast->display(); }
 

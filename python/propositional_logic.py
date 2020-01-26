@@ -1,3 +1,10 @@
+#
+#  propositional_logic.py
+#
+#  Created by Anthony Sainez on 9 November 2019
+#  Copyright © 2020 Anthony Sainez. All rights reserved.
+#
+
 from truth_table_generator import TruthTable
 
 # problem 1, basic truth tables

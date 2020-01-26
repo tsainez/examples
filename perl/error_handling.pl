@@ -1,3 +1,10 @@
+#
+#  error_handling.pl
+#
+#  Created by Anthony Sainez on 9 July 2017
+#  Copyright © 2020 Anthony Sainez. All rights reserved.
+#
+
 use strict;
 use warnings;
 use diagnostics;
