@@ -19,7 +19,7 @@ int main() {
     PrintPoint(p1);
     
     struct point *p;
-    // the following code is identical
+
     printf("x is %d\n", (*p).x);
-    printf("x is %d\n", p->x);
+    printf("x is %d\n", p->x); // identical to above line
 }
