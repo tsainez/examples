@@ -5,37 +5,31 @@
 // Copyright © 2020 Anthony Sainez. All rights reserved.
 //
 
-#import <stdio.h>
+#include <stdio.h>
+
+/*
+   Read a set of values from the user.
+    Store the sum in the sum variable and return the number of values read.
+*/
+
+int read_values(double *sum) {
+  int values=0,input=0;
+  *sum = 0;
+  printf("Enter input values (enter 0 to finish):\n");
+  scanf("%d",&input);
+  while(input != 0) {
+    values++;
+    *sum += input;
+    scanf("%d", &input);
+  }
+  return values;
+}
 
 int main() {
-	int num = 0;
-	int posTotal = 0, posCount = 0;
-	int negTotal = 0, negCount = 0;
-	
-	printf("Please enter an integer: ");
-	scanf("%d", &num);	
-
-	while (num != 0) {
-		if(num > 0) {
-			posTotal += num;
-			posCount++;
-        } else {
-            if (num < 0) {
-                negTotal += num;
-                negCount++;
-            }
-		}
-
-		printf("Please enter an integer: ");
-		scanf("%d", &num);
-	}
-
-	if (posCount != 0) {
-		printf("Positive average: %d \n", (posTotal / posCount));
-	}
-	
-    if (negCount != 0) {
-		printf("Negative average: %d \n", (negTotal / negCount));
-	}
-
+  double sum=0;
+  int values;
+  values = read_values(&sum);
+  printf("Average: %.2f\n",sum/values);
+  return 0;
 }
+
