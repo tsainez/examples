@@ -11,14 +11,14 @@
 
 void printArr(int *a, int size){
     printf("Printing an array...\n");
-	for(int i = 0; i <= size; i++) {
+	for(int i = 0; i < size; i++) {
 		printf("array[%d] = %d\n", i, *(a+i));
 	}
 }
 
 int* arrCopy(int *a, int size){
     int *newArr = (int *)malloc(size * sizeof(int)); // dynamically init a new array
-    for(int i = 0; i <= size; i++) {
+    for(int i = 0; i < size; i++) {
         *(newArr+i) = *(a+i);
     }
     return newArr;
@@ -37,7 +37,7 @@ int main(){
     arr = (int *)malloc(n * sizeof(int));
     
     //Ask user to input content of array
-    for(i = 0; i <= n; i++) {
+    for(i = 0; i < n; i++) {
         printf("Input content of array[%d]:\n", i);
         scanf("%d", (arr+i));
     }
