@@ -22,27 +22,46 @@ void addOne (int *p) {
 */
 
 int main() {
-    int *p, x; // *p stores the address of an integer, x stores an integer
+    int x, y, *px, *py;
+    int n = 10; // n stands for number of elements
+    int array[n];
     
+    // Practice manipulating pointers.
+    printf("The value of x is %d\n", x);
+    printf("The value of y is %d\n", y);
+    printf("The value of array[0] is %d\n", array[0]);
+    
+    printf("\n");
     x = 3;
+    y = 4;
+    array[0] = 5;
     
-    p =&x; // p now stores the address of x, & gets the address of a variable
+    printf("The value of x is now %d\n", x);
+        printf("The value of y is now %d\n", y);
+        printf("The value of arr[0] is now %d\n", array[0]);
     
-    printf("p points to %d\n", *p); // % is a flag, d refers to integer,
-                                    // * is a derefernce operator, it gets the value pointed to
+    printf("\n");
+    printf("The address of x is %p\n", &x);
+    printf("The address of y is %p\n", &y);
+    printf("The address of arr[0] is %p\n", &array[0]);
     
-    int y = 4;
+    printf("\n");
+    px = &x;
+    py = &y;
     
-    *p = y; // reassignment of a pointer
+    printf("px now points to x, which is at %p\n", px);
+    printf("py now points to y, which is at %p\n", py);
+    printf("The address of px is %p\n", &px);
+    printf("The address of py is %p\n", &py);
+
+    for(int i = 0; i < n; i++) {
+        printf("array[%d] = %d\n", i, *(array+i));
+    }
     
-    printf("p points to %d\n", *p);
-    
-    addOne(&y);
-    
-    printf("y is now %d\n", y);
-    
-    int *q = (int *) x; // casting
-    printf("q points to %d\n", *q);
+    printf("array points to array[0], whose address is %p\n", array);
+    printf("The address of array[0] is %p\n", &array[0]);
+
+    printf("The address of array is %p\n", &array);
 
     return 0;
 }
