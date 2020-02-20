@@ -1,3 +1,10 @@
+//
+// bubbleSort.c
+//
+// Created by Anthony Sainez on 20 February 2020
+// Copyright © 2020 Anthony Sainez. All rights reserved.
+//
+
 #include <stdio.h>
 #include <stdlib.h>
 //#include <malloc.h>
