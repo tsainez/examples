@@ -20,7 +20,6 @@ public:
     top = -1; // no items yets
   }
 
-  =
   void push(char newLetter) {
     stackArray[++top] = newLetter;
   }
