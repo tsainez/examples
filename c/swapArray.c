@@ -1,4 +1,11 @@
-#import <stdio.h>
+//
+// swapArray.c
+//
+// Created by Anthony Sainez on 25 February 2020
+// Copyright © 2020 Anthony Sainez. All rights reserved.
+//
+
+#include <stdio.h>
 #include <stdlib.h>
 
 void swapArray(int* a1, int* a2, int size) {
