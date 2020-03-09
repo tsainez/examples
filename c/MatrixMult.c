@@ -10,7 +10,7 @@
 //#include <malloc.h>
 
 int** matMult(int **a, int **b, int size){
-	// (4) Implement your matrix multiplication here. You will need to create a new matrix to store the product.
+    // (4) Implement your matrix multiplication here. You will need to create a new matrix to store the product.
     int **mul;
     mul = (int **)malloc(size * sizeof(int *));
     int sum = 0;
@@ -32,7 +32,7 @@ int** matMult(int **a, int **b, int size){
 }
 
 void printArray(int **arr, int n){
-	// (2) Implement your printArray function here
+    // (2) Implement your printArray function here
     for(int i = 0; i < n; i++) {
         for(int j = 0; j < n; j++) {
             printf("[%d]",arr[i][j]);
@@ -42,9 +42,9 @@ void printArray(int **arr, int n){
 }
 
 int main() {
-	int n = 3, count = 0;
-	int **matA, **matB, **matC;
-	// (1) Define 2 n x n arrays (matrices).
+    int n = 3, count = 0;
+    int **matA, **matB, **matC;
+    // (1) Define 2 n x n arrays (matrices).
     // The following process could be made cleaner with the use of functions.
     matA = (int **)malloc(n * sizeof(int *));
     
@@ -69,20 +69,20 @@ int main() {
             matB[i][j] = ++count;
         }
     }
-
-	// (3) Call printArray to print out the 2 arrays here.
+    
+    // (3) Call printArray to print out the 2 arrays here.
     printf("matA = \n");
     printArray(matA, n);
     printf("matB = \n");
     printArray(matB, n);
-	
-	//(5) Call matMult to multiply the 2 arrays here.
+    
+    //(5) Call matMult to multiply the 2 arrays here.
     printf("matC = \n");
     matC = matMult(matA, matB, n);
-	
-	//(6) Call printArray to print out resulting array here.
+    
+    //(6) Call printArray to print out resulting array here.
     printArray(matC, n);
-
-
+    
+    
     return 0;
 }
