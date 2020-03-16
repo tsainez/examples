@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Upload Image</title>
+</head>
+<body>
+	<form action="uploadFile.php" method="post" enctype="multipart/form-data">
+		<div>
+			<label for="upload">Upload File:
+				<input type="file" id="upload" name="upload"></label>
+			</div>
+			<div>
+				<label for"desc">File Description:
+					<input type="text" id="desc" name="desc" maxlength="255"></label>
+				</div>
+				<div>
+					<input type="hidden" name="action" value="upload">
+					<input type="submit" value="Upload">
+				</div>
+		<!--
+			<div>
+				<input type=
+			</div>
+		-->
+	</form>
+</body>
+</html>
