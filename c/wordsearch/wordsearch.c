@@ -152,7 +152,7 @@ void changeCase(char** arr, int wordSize, int row, int col, int type){
                 if(*(*(arr+row)+i) >= 97) {
                     *(*(arr+row)+i) = *(*(arr+row)+i); // No change!
                 } else {
-                    *(*(arr+row)+i) = (char)(*(*(arr+row)+i)+32);
+                    *(*(arr+row)+i) = (*(*(arr+row)+i)+32);
                     // changeCase_name(arr[row], i);
                 }
             }
@@ -162,7 +162,7 @@ void changeCase(char** arr, int wordSize, int row, int col, int type){
                 if(*(*(arr+i)+col) >= 97) {
                     *(*(arr+i)+col) = *(*(arr+i)+col);
                 } else {
-                    *(*(arr+i)+col) = (char)(*(*(arr+i)+col)+32);
+                    *(*(arr+i)+col) = (*(*(arr+i)+col)+32);
                 }
             }
             break;
@@ -171,7 +171,7 @@ void changeCase(char** arr, int wordSize, int row, int col, int type){
                 if(*(*(arr+row+i)+col+i) >= 97) {
                     *(*(arr+row+i)+col+i) = *(*(arr+row+i)+col+i);
                 } else {
-                    *(*(arr+row+i)+col+i) = (char)(*(*(arr+row+i)+col+i)+32);
+                    *(*(arr+row+i)+col+i) = (*(*(arr+row+i)+col+i)+32);
                 }
             }
             break;
@@ -180,7 +180,7 @@ void changeCase(char** arr, int wordSize, int row, int col, int type){
                 if(*(*(arr+row-i)+col+i) >= 97) {
                     *(*(arr+row-i)+col+i) = *(*(arr+row-i)+col+i);
                 } else {
-                    *(*(arr+row-i)+col+i) = (char)(*(*(arr+row-i)+col+i)+32);
+                    *(*(arr+row-i)+col+i) = (*(*(arr+row-i)+col+i)+32);
                 }
             }
             break;
@@ -212,13 +212,13 @@ int searchHorizontal(char** arr, int n, char* word){
                 if(*(word+index) >= 97) {
                     a = *(word+index);
                 } else {
-                    a = (char)(*(word+index)+32);
+                    a = (*(word+index)+32);
                 }
                 
                 if(*(*(arr+i)+index+j) >= 97) {
                     b = *(*(arr+i)+index+j);
                 } else {
-                    b = (char)(*(*(arr+i)+index+j)+32);
+                    b = (*(*(arr+i)+index+j)+32);
                 }
                 
                 if(a == b) { // Characters match
@@ -250,13 +250,13 @@ int searchVertical(char** arr, int n, char* word){
                 if(*(word+index) >= 97) {
                     a = *(word+index);
                 } else {
-                    a = (char)(*(word+index)+32);
+                    a = (*(word+index)+32);
                 }
                 
                 if(*(*(arr+index+j)+i) >= 97) {
                     b = *(*(arr+index+j)+i);
                 } else {
-                    b = (char)(*(*(arr+index+j)+i)+32);
+                    b = (*(*(arr+index+j)+i)+32);
                 }
                 
                 if(a==b) { //found character matching
@@ -288,13 +288,13 @@ int searchDiagnolTLBR(char** arr, int n, char* word){
                 if(*(word+index) >= 97) {
                     a = *(word+index);
                 } else {
-                    a = (char)(*(word+index)+32);
+                    a = (*(word+index)+32);
                 }
                 
                 if(*(*(arr+i+index)+j+index) >= 97) {
                     b = *(*(arr+i+index)+j+index);
                 } else {
-                    b = (char)(*(*(arr+i+index)+j+index)+32);
+                    b = (*(*(arr+i+index)+j+index)+32);
                 }
                 if(a==b){ // Match character
                     if(index == size-1){ // Last character
