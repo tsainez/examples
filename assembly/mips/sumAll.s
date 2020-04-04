@@ -18,14 +18,14 @@ li $s0, 0 # pos
 li $s1, 0 # neg
 
 loop:
-    li $v0, 4
+    li $v0, 4 # load immediate
     la $a0, enter # prompt
     syscall
 
     li $v0, 5
     syscall # input
     move $t0, $v0
-    beqz $t0, done
+    beqz $t0, done # branch on greater than or equal to zero
     bltz $t0, negativeAdd # if x > 0
     add $s0, $s0, $t0 # is pos
     j skip
@@ -43,7 +43,7 @@ done:
 
     move $a0, $s0
     li $v0, 1
-    syscall
+    syscall # print it!
 
     li $v0, 4
     la $a0, negativePrompt # prompt
@@ -51,4 +51,4 @@ done:
 
     move $a0, $s1
     li $v0, 1
-    syscall
+    syscall # print it!
