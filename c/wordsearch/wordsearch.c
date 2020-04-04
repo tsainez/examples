@@ -307,14 +307,14 @@ int searchDiagnolBLTR(char** arr, int n, char* word){
                 if(*(word+index) >= 97) {
                     a = *(word+index);
                 } else {
-                    a = (char)(*(word+index)+32);
+                    a = (*(word+index)+32);
                 }
                 
                 if(*(*(arr+i-index)+j+index) >= 97) {
                     b = *(*(arr+i-index)+j+index);
                     
                 } else {
-                    b = (char)(*(*(arr+i-index)+j+index)+32);
+                    b = (*(*(arr+i-index)+j+index)+32);
                 }
                 
                 if(a == b){ // Match found
