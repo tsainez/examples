@@ -130,71 +130,31 @@ void searchPuzzle(char** arr, int n, char** list, int listSize){
     }
 }
 
-void changeCase(char** arr, int wordSize, int row, int col, int type){
-    /*
-     // This function I wrote initially doesn't help very much...
-     char* p;
-     char* result;
-     result = (char*)malloc(1+strlen(str));
-     strcpy(result, str);
-     for(p = result; *p != '\0'; p++) {
-     // A = 65, a = 97, z = 90, z = 122
-     if (*p >= 'A' && *p <= 'Z') {
-     *p -= 32; //
-     }
-     }
-     return result;
-     */
-    
-    switch(type){
-        case 1: // Horizontal
-            for(int i = col; i < col+wordSize; i++) {
-                if(*(*(arr+row)+i) >= 97) {
-                    *(*(arr+row)+i) = *(*(arr+row)+i); // No change!
-                } else {
-                    *(*(arr+row)+i) = (*(*(arr+row)+i)+32);
-                    // changeCase_name(arr[row], i);
-                }
-            }
-            break;
-        case 2:  // Vertical
-            for(int i = row; i < row+wordSize; i++) {
-                if(*(*(arr+i)+col) >= 97) {
-                    *(*(arr+i)+col) = *(*(arr+i)+col);
-                } else {
-                    *(*(arr+i)+col) = (*(*(arr+i)+col)+32);
-                }
-            }
-            break;
-        case 3:   // TL->BR
-            for(int i = 0; i < wordSize; i++) {
-                if(*(*(arr+row+i)+col+i) >= 97) {
-                    *(*(arr+row+i)+col+i) = *(*(arr+row+i)+col+i);
-                } else {
-                    *(*(arr+row+i)+col+i) = (*(*(arr+row+i)+col+i)+32);
-                }
-            }
-            break;
-        case 4:   // BL->TR
-            for(int i = 0; i < wordSize; i++) {
-                if(*(*(arr+row-i)+col+i) >= 97) {
-                    *(*(arr+row-i)+col+i) = *(*(arr+row-i)+col+i);
-                } else {
-                    *(*(arr+row-i)+col+i) = (*(*(arr+row-i)+col+i)+32);
-                }
-            }
-            break;
-    }
-}
-
 /*
  
+ void changeCase(char* str){
+    // This function I wrote initially doesn't help very much...
+    // So I decided instead to make it change the case in each search function.
+    char* p;
+    char* result;
+    result = (char*)malloc(1+strlen(str));
+    strcpy(result, str);
+    for(p = result; *p != '\0'; p++) {
+        // A = 65, a = 97, z = 90, z = 122
+        if (*p >= 'A' && *p <= 'Z') {
+            *p -= 32; //
+        }
+    }
+    return result;
+ 
+ }
+ 
  void changeCase_by_ref(char** n) {
- *n = changeCase(*n);
+    *n = changeCase(*n);
  }
  
  void changeCase_name(char* names[], int i) {
- changeCase_by_ref(&(names[i]));
+    changeCase_by_ref(&(names[i]));
  }
  
  */
@@ -221,9 +181,16 @@ int searchHorizontal(char** arr, int n, char* word){
                     b = (*(*(arr+i)+index+j)+32);
                 }
                 
-                if(a == b) { // Characters match
-                    if(index == size-1) { // Check last character
-                        changeCase(arr, size, i, j, 1);
+                if(a == b) { // Match is found
+                    // Now we have a match, we can change the case.
+                    if(index == size-1) {
+                        for(int k = j; k < j+size; k++) {
+                            if(*(*(arr+i)+k) >= 97) {
+                                *(*(arr+i)+k) = *(*(arr+i)+k); // No change!
+                            } else {
+                                *(*(arr+i)+k) = (*(*(arr+i)+k)+32);
+                            }
+                        }
                         return 1; // Found it!
                     }
                 } else {
@@ -231,11 +198,11 @@ int searchHorizontal(char** arr, int n, char* word){
                 }
                 
                 index++;
-            } // end while
-        } // end second for
-    } // end first for
+            }
+        }
+    }
     return 0;
-} // end searchHorizontal
+}
 
 int searchVertical(char** arr, int n, char* word){
     // Type 2
@@ -259,21 +226,29 @@ int searchVertical(char** arr, int n, char* word){
                     b = (*(*(arr+index+j)+i)+32);
                 }
                 
-                if(a==b) { //found character matching
-                    if(index == size-1) { //last character
-                        changeCase(arr, size, j, i, 2);
+                if(a == b) { // Match is found
+                    if(index == size-1) {
+                        // changeCase
+                        for(int k = j; k < j+size; k++) {
+                            if(*(*(arr+k)+i) >= 97) {
+                                *(*(arr+k)+i) = *(*(arr+k)+i);
+                            } else {
+                                *(*(arr+k)+i) = (*(*(arr+k)+i)+32);
+                            }
+                        }
+                        
                         return 1; // Found it!
                     }
                 } else {
                     break;
                 }
                 index++;
-            } // end while
-        } // end second for
-    } // end first for
+            }
+        }
+    }
     
     return 0;
-} // end searchVertical
+}
 
 int searchDiagnolTLBR(char** arr, int n, char* word){
     // Type 3
@@ -296,9 +271,16 @@ int searchDiagnolTLBR(char** arr, int n, char* word){
                 } else {
                     b = (*(*(arr+i+index)+j+index)+32);
                 }
-                if(a==b){ // Match character
+                if(a == b){ // Match character
                     if(index == size-1){ // Last character
-                        changeCase(arr, size, i, j, 3);
+                        // changeCase
+                        for(int k = 0; k < size; k++) {
+                            if(*(*(arr+i+k)+j+k) >= 97) {
+                                *(*(arr+i+k)+j+k) = *(*(arr+i+k)+j+k);
+                            } else {
+                                *(*(arr+i+k)+j+k) = (*(*(arr+i+k)+j+k)+32);
+                            }
+                        }
                         return 1; // Found it!
                     }
                 } else {
@@ -335,9 +317,16 @@ int searchDiagnolBLTR(char** arr, int n, char* word){
                     b = (char)(*(*(arr+i-index)+j+index)+32);
                 }
                 
-                if(a==b){ // Character match
-                    if(index == size-1){ // Last character
-                        changeCase(arr, size, i, j, 4);
+                if(a == b){ // Match found
+                    if(index == size-1){
+                        // changeCase
+                        for(int k = 0; k < size; k++) {
+                            if(*(*(arr+i-k)+j+k) >= 97) {
+                                *(*(arr+i-k)+j+k) = *(*(arr+i-k)+j+k);
+                            } else {
+                                *(*(arr+i-k)+j+k) = (*(*(arr+i-k)+j+k)+32);
+                            }
+                        }
                         return 1; // Found it!
                     }
                 } else {
@@ -347,6 +336,5 @@ int searchDiagnolBLTR(char** arr, int n, char* word){
             }
         }
     }
-    
     return 0;
 }
