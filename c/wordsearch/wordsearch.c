@@ -2,7 +2,8 @@
 //  wordsearch.c
 //
 //
-//  Created by Anthony Sainez on 2/29/20.
+//  Created by Anthony Sainez on 2/29/2020.
+//  Modified 4/23/2020.
 //
 
 #include <stdio.h>
@@ -16,10 +17,14 @@ void printPuzzle(char** arr, int n);
 void searchPuzzle(char** arr, int n, char** list, int listSize);
 
 /// Helper Functions
-int searchHorizontal(char** arr, int n, char* word);
-int searchVertical(char** arr, int n, char* word);
-int searchDiagnolTLBR(char** arr, int n, char* word);
-int searchDiagnolBLTR(char** arr, int n, char* word);
+int searchHorizontal1(char** arr, int n, char* word); // Left to right -->
+int searchHorizontal2(char** arr, int n, char* word); // Right to left <--
+
+int searchVertical1(char** arr, int n, char* word); // Bottom to top
+int searchVertical2(char** arr, int n, char* word); // Top to bottom
+
+int searchDiagnolTLBR(char** arr, int n, char* word); // Top left to bottom right
+int searchDiagnolTRBL(char** arr, int n, char* word); // Top right to bottom left
 
 // Main function, DO NOT MODIFY!!!
 int main(int argc, char **argv) {
@@ -95,6 +100,7 @@ void printPuzzle(char** arr, int n){
     // Your implementation here
     for(int i = 0; i < n; i++) {
         for(int j = 0; j < n; j++) {
+            // for future reference:
             // arr[i][j] == *(*(arr+i)+j)
             printf("%c ", *(*(arr + i) + j));
         }
@@ -110,15 +116,23 @@ void searchPuzzle(char** arr, int n, char** list, int listSize){
         // Check each search method through the list of words.
         // If a word is found, it will return true, and automatically
         // convert to lowercase.
-        if(searchHorizontal(arr, n, *(list+i) ) ||
-           searchVertical(arr, n, *(list+i) ) ||
+        
+        // This huge if statement could be improved but I need to get this project done :(
+        if(searchHorizontal1(arr, n, *(list+i) ) ||
+           searchHorizontal2(arr, n, *(list+i) ) ||
+           
+           searchVertical1(arr, n, *(list+i) ) ||
+           searchVertical2(arr, n, *(list+i) ) ||
+           
            searchDiagnolTLBR(arr, n, *(list+i) ) ||
-           searchDiagnolBLTR(arr, n, *(list+i) )
+           searchDiagnolTRBL(arr, n, *(list+i) )
            ) {
             // This part is actually not necessary and can be entirely omitted.
             printf("Word found: %s\n", *(list+i) );
             found++;
         }
+        
+        
     } // end for
     
     // Verification Process
@@ -133,20 +147,20 @@ void searchPuzzle(char** arr, int n, char** list, int listSize){
 /*
  
  void changeCase(char* str){
-    // This function I wrote initially doesn't help very much...
-    // So I decided instead to make it change the case in each search function.
-    char* p;
-    char* result;
-    result = (char*)malloc(1+strlen(str));
-    strcpy(result, str);
-    for(p = result; *p != '\0'; p++) {
-        // A = 65, a = 97, z = 90, z = 122
-        if (*p >= 'A' && *p <= 'Z') {
-            *p -= 32; //
+     // This function I wrote initially doesn't help very much...
+     // So I decided instead to make it change the case in each search function.
+     char* p;
+     char* result;
+     result = (char*)malloc(1+strlen(str));
+     strcpy(result, str);
+     for(p = result; *p != '\0'; p++) {
+         // A = 65, a = 97, z = 90, z = 122
+         if (*p >= 'A' && *p <= 'Z') {
+         *p -= 32; //
         }
-    }
-    return result;
- 
+     }
+     return result;
+     
  }
  
  void changeCase_by_ref(char** n) {
@@ -159,10 +173,10 @@ void searchPuzzle(char** arr, int n, char** list, int listSize){
  
  */
 
-int searchHorizontal(char** arr, int n, char* word){
-    // Type 1
-    int size = strlen(word);
+int searchHorizontal1(char** arr, int n, char* word){
+    // Left to right
     
+    int size = strlen(word);
     for(int i = 0; i<n; i++) {
         for(int j = 0; j < n-size; j++) {
             int index = 0;
@@ -204,10 +218,10 @@ int searchHorizontal(char** arr, int n, char* word){
     return 0;
 }
 
-int searchVertical(char** arr, int n, char* word){
-    // Type 2
-    int size = strlen(word);
+int searchVertical1(char** arr, int n, char* word){
+    // Bottom to top
     
+    int size = strlen(word);
     for(int i = 0; i < n; i++){
         for(int j = 0; j < n-size; j++){
             int index=0;
@@ -251,7 +265,8 @@ int searchVertical(char** arr, int n, char* word){
 }
 
 int searchDiagnolTLBR(char** arr, int n, char* word){
-    // Type 3
+    // Stands for top left to bottom right
+    
     int size = strlen(word);
     
     for(int i=0; i<n; i++){
@@ -281,6 +296,7 @@ int searchDiagnolTLBR(char** arr, int n, char* word){
                                 *(*(arr+i+k)+j+k) = (*(*(arr+i+k)+j+k)+32);
                             }
                         }
+                        
                         return 1; // Found it!
                     }
                 } else {
@@ -294,8 +310,9 @@ int searchDiagnolTLBR(char** arr, int n, char* word){
     return 0;
 }
 
-int searchDiagnolBLTR(char** arr, int n, char* word){
-    // Type 4
+int searchDiagnolTRBL(char** arr, int n, char* word){
+    // Stands for top right to bottom left
+    
     int size = strlen(word);
     
     for(int i = n-1; i > 0; i--){
@@ -327,6 +344,7 @@ int searchDiagnolBLTR(char** arr, int n, char* word){
                                 *(*(arr+i-k)+j+k) = (*(*(arr+i-k)+j+k)+32);
                             }
                         }
+                        
                         return 1; // Found it!
                     }
                 } else {
@@ -336,5 +354,107 @@ int searchDiagnolBLTR(char** arr, int n, char* word){
             }
         }
     }
+    return 0;
+}
+
+/// New Changes
+
+int searchHorizontal2(char** arr, int n, char* word) {
+    // Right to left
+    
+    // In order to switch directions for the cases of horizontal, you must change
+    // the second for loop so that j = n-1 and decrement from there. This way you
+    // are counting backwards.
+    
+    int size = strlen(word);
+    
+    for(int i = 0; i<n; i++) {
+        for(int j = n-1; j >= size-1; j--) {
+            int index = 0;
+            while(index < size) {
+                char a, b;
+                
+                if(*(word+index) >= 97) {
+                    a = *(word+index);
+                } else {
+                    a = (*(word+index)+32);
+                }
+                
+                if(*(*(arr+i)+index+j) >= 97) {
+                    b = *(*(arr+i)+index+j);
+                } else {
+                    b = (*(*(arr+i)+index+j)+32);
+                }
+                
+                if(a == b) { // Match is found
+                    // Now we have a match, we can change the case.
+                    if(index == size-1) {
+                        
+                        for(int k =j; k>j-size; k--){
+                            if((*(*(arr+i)+k)>=97)) {
+                                *(*(arr+i)+k) = *(*(arr+i)+j);
+                            } else {
+                                *(*(arr+i)+k) = (*(*(arr+i)+k)+32);
+                            }
+                        }
+                        
+                        return 1; // Found it!
+                    }
+                } else {
+                    break;
+                }
+                index++;
+            }
+        }
+    }
+    return 0;
+}
+
+int searchVertical2(char** arr, int n, char* word){
+    // Bottom to Top
+    
+    // In order to switch directions for the cases of vertical, you must change
+    // the second for loop so that j = n-1 and decrement from there. This way you
+    // are counting backwards.
+    
+    int size = strlen(word);
+    
+    for(int i = 0; i < n; i++){
+        for(int j = n-1; j >= size-1; j--){
+            int index = 0;
+            while(index < size){
+                char a, b;
+                if (*(word+index)>=97) {
+                    a = *(word+index);
+                } else {
+                    a = (*(word+index)+32);
+                }
+                
+                if (  *(*(arr+j-index)+i)>=97   ) {
+                    b = *(*(arr+j-index)+i);
+                } else {
+                    b = (*(*(arr+j-index)+i)+32);
+                }
+                if(a==b){ // Match is found
+                    // Now we have a match, we can change the case.
+                    if(index == size-1){
+                        for(int k = i; k > j-size; k--){
+                            if (*(*(arr+k)+i) >= 97) {
+                                *(*(arr+k)+i) = *(*(arr+k)+i);
+                            } else {
+                                *(*(arr+k)+i) = (*(*(arr+k)+i)+32);
+                            }
+                        }
+                        
+                        return 1;
+                    }
+                } else {
+                    break;
+                }
+                index++;
+            }
+        }
+    }
+    
     return 0;
 }
