@@ -112,7 +112,7 @@ main:
 	syscall
 	
 	add	$a0,	$s0,	$zero
-        li	$v0,	1
+	li	$v0,	1
 	syscall
 	
 	li	$v0,	4
