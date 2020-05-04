@@ -30,13 +30,9 @@ main:
         #It then calls maxBars function to perform calculation of the maximum BobCat Bars the user will receive based on the information entered.
         #It then prints out a statement about the maximum BobCat Bars the user will receive.
         
-        addi $sp, $sp -4    # Feel free to change the increment if you need for space.
-        sw $ra, 0($sp)
+        #addi $sp, $sp -4    # Feel free to change the increment if you need for space.
+        #sw $ra, 0($sp)
         # Implement your main here
-
-        li $s0, 0   # price
-        li $s1, 0   # n
-        li $s2, 0   # money
 
         la  $a0, str0       # load address of str0 for syscall
         li  $v0, 4          # print string service
@@ -46,12 +42,11 @@ main:
         #li $v0, 4          # print string service, but $v0 is already 4
         syscall             # "\nPlease enter the price of a BobCat Bar:\n"
 
+        addi $sp, $sp, -4
         li  $v0, 5          # read integer service
         syscall             # allow user input for price of BobCat Bar
-        #move    $t0, $v0    # store user input in $t0
-        addi $sp, $sp -4
-        sw $v0, 0($sp)
-        lw $s0, 0($sp)
+        move    $a0, $v0    # store user input in $a0
+        sw  $a0, 0($sp)     # store price in the stack
 
         la  $a0, wrappers   # load address of wrappers prompt for syscall
         li  $v0, 4          # print string service
@@ -59,10 +54,8 @@ main:
         
         li  $v0, 5          # read integer service
         syscall             # allow user input for number of wrappers
-        #move    $t1, $v0    # store user input in $t1
-        addi $sp, $sp, -4
-        sw $v0, 0($sp)
-        lw $s1, 0($sp)
+        move    $a1, $v0    # store user input in $a1
+                            # no need to use the stack pointer for this.
 
         la  $a0, money      # load address of money prompt for syscall
         li  $v0, 4          # print string service
@@ -70,46 +63,112 @@ main:
 
         li  $v0, 5          # read integer service
         syscall             # allow user input for money available
-        #move    $t2, $v0    # store user input in $t2
-        addi $sp, $sp -4
-        sw $v0, 0($sp)
-        lw $s2, 0($sp)
+        move    $s0, $v0    # store user input in $s0
+                            # it is important we save this value for its use later
 
         la  $a0, good       # load address of the "good" bit
         li  $v0, 4          # print string service
         syscall             # "Good! let me run the number..."
 
-        # Now, the price is stored in $t0,
-        # and the number of wrappers for exchange is in $t1,
-        # and the money available to spend is in $t2.
+        # Now, the price is stored in at 0($sp),
+        # and the number of wrappers for exchange is in $a1,
+        # and the money available to spend is in $s0.
 
-        # move    $a0,    $t1
-        # move    $a1,    $t0
-        # move    $a2,    $t2
+        lw $a0, 0($sp)
+        
+        # Before we calculate how many in total you can buy...
+        # we should check to see you can buy any in the first place
+        
+        div $t0, $s0, $a0
+        li $v0, 0
+        beq $t0, $zero, none
 
-        # save the arguments to later, they are special
+        li $v0, 4,
+        la $a0, firstbuy
+        syscall
 
-        # move    $s0,    $a0 # n
-        # move    $s1,    $a1 # price
-        # move    $s2,    $a2 # money
+        add $a0, $t0, $zero # print this number
+        li $v0, 1
+        syscall
+
+        li $v0, 4
+        la $a0, bars
+        syscall
+
+        # save amount of bars initially bought, $a0
+        # save amount of wrappers needed, $a1
+        move $a0, $t0
+        move $t2, $t0
 
         jal maxBars     # Call maxBars to calculate the maximum number of BobCat Bars
 
         # Print out final statement here
+        add $v0, $v0, $t2
 
-        j end            # Jump to end of program
+        none:   # Case if insufficent money to buy a single bar
+        sw $v0, 0($sp)
 
+        li $v0, 4
+        la $a0, with
+        syscall
+
+        add $a0, $s0, $zero
+        li $v0, 1
+        syscall
+
+        li $v0, 4
+        la $a0, max
+        syscall
+
+        lw $v0, 0($sp)
+        add $a0, $v0, $zero
+        li $v0, 1
+        syscall
+
+        li $v0, 4
+        la $a0, exclamation
+        syscall
+
+        j end   # Jump to the end of the program!
+        
 maxBars:
         # This function calculates the maximum number of BobCat Bars.
         # It takes in 3 arguments ($a0, $a1, $a2) as n, price, and money. It returns the maximum number of bars
-        li $s3, 0   # total
-        li $s4, 0   # remainder
-        li $s5, 0   # new remain
-        li $s6, 0   # counter
-        div $s2, $s0    # total = totalmoney / bar
-        mflo $s3
-        jal secondcase
+        addi $sp, $sp, -12
+        sw $ra 8($sp)
+        div $t0, $a0, $a1
+        bne $t0, $zero, newBars
+        li $v0, 0
+        
+        # Time to end
+        lw $ra, 8($sp)
+        addi $sp, $sp, 12
         jr $ra
+
+        #//div $s2, $s0    # total = totalmoney / bar
+        #//mflo $s3
+        
+        #//div $s2, $s0
+        #//mflo $s3
+
+        #//beq $s3, $0, end
+
+        #//li  $v0, 4
+        #//la  $a0, firstbuy
+        #//syscall
+
+        #//li $v0, 1
+        #//move $a0, $s3
+        #//syscall
+
+        #//li $v0, 4
+        #//la $a0, bars
+        #//syscall
+
+        #//add $s6, $s6, $s3 # counter = counter + total
+        #//jal newBars
+
+        #//jr $ra
         
         # div $t2, $t0
         # mflo    $s1
@@ -138,54 +197,44 @@ maxBars:
 		# jr $ra
 		# End of maxBars
 
-firstcase:
-        bne $s1, 0, end # wrapper = 0?
-
-secondcase:
-        div $s2, $s0
-        mflo $s3
-
-        beq $s3, $0, end
-        
-        li  $v0, 4
-        la  $a0, firstbuy
-        syscall
-
-        li $v0, 1
-        move $a0, $s3
-        syscall
-        
-        li $v0, 4
-        la $a0, bars
-        syscall
-
-        add $s6, $s6, $s3 # counter = counter + total
-        jal newBars
-
 newBars:
-        beq $s3, $0 end
-        div $s3, $s1
-        mflo $s4
+        div $a0, $a0, $a1
+        sw $a0, 4($sp)
         
-        beq $s4, $0, end
+        #//beq $s3, $0 end
+        #//div $s3, $s1
+        #//mflo $s4
+        
+        #//beq $s4, $0, end
         
         li $v0, 4
         la $a0, another
         syscall
         
+        lw $a0 4($sp)
         li $v0, 1
-        move $a0, $s4
-        move $s3, $s4
         syscall
+
+        #//move $a0, $s4
+        #//move $s3, $s4
+        #//syscall
 
         li $v0, 4
         la $a0, bars
         syscall
-        
-        add $s6, $s6, $s4
 
-        jal newBars
+        # This is the recursion bit...
+        lw $a0 4($sp)
+        jal maxBars
+
+        # Now we've returned...
+        lw $a0 4($sp)
+        add $v0, $a0, $v0   # update the return value
         
+        # Jump to the end
+        lw $ra, 8($sp)
+        addi $sp, $sp, 12
+        jr $ra
 
 #newBars:
 		# This function calculates the number of BobCat Bars a user will receive based on n.
@@ -217,8 +266,8 @@ newBars:
 		# End of newBars
 
 end:
-        la $t1, ($s2)
-        la $t2, ($s6)
+        #//la $t1, ($s2)
+        #//la $t2, ($s6)
         #la  $a0, with   # load address of "with" bit
         #li  $v0, 4      # print string service
         #syscall         # "\nWith $"
@@ -239,28 +288,28 @@ end:
         #li  $v0, 4              # print string service
         #syscall
 
-        li $v0, 4
-        la $a0, with
-        syscall
+        #//li $v0, 4
+        #//la $a0, with
+        #//syscall
 
-        li $v0, 1
-        move $a0, $s2
-        syscall
+        #//li $v0, 1
+        #//move $a0, $s2
+        #//syscall
 
-        li $v0, 4
-        la $a0, max
-        syscall
+        #//li $v0, 4
+        #//la $a0, max
+        #//syscall
 
-        li $v0, 1
-        move $a0, $s6
-        syscall
+        #//li $v0, 1
+        #//move $a0, $s6
+        #//syscall
 
-        li $v0, 4
-        la $a0, exclamation
-        syscall
+        #//li $v0, 4
+        #//la $a0, exclamation
+        #//syscall
 
-		# Terminating the program
-		lw $ra, 0($sp)
-		addi $sp, $sp 4
-		li $v0, 10
-		syscall
+	# Terminating the program
+	lw $ra, 0($sp)
+	addi $sp, $sp 4
+	li $v0, 10
+	syscall
