@@ -24,7 +24,7 @@ exclamation:	.asciiz " Bobcat Bars!"
 
 main:
 	#This is the main program.
-        #It first asks user to enter the price of each BobCat Bar.
+	#It first asks user to enter the price of each BobCat Bar.
 	#It then asks user to enter the number of bar wrappers needed to exchange for a new bar.
 	#It then asks user to enter how much money he/she has.
 	#It then calls maxBars function to perform calculation of the maximum BobCat Bars the user will receive based on the information entered.
@@ -136,11 +136,11 @@ maxBars:
 	addi	$sp,	$sp,	-12
 	sw	$ra,	8($sp)
         
-        div	$t0,	$a0,	$a1
+	div	$t0,	$a0,	$a1
         
-        bne	$t0,	$zero,	newBars
+	bne	$t0,	$zero,	newBars
         
-        li	$v0,	0	# Reset this, so the assembler doesn't get confused.
+	li	$v0,	0	# Reset this, so the assembler doesn't get confused.
         			# If you don't reset this, it will add 4 to the max.
         
 	# Restore return address
