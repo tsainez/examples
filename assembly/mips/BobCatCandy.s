@@ -149,14 +149,28 @@ maxBars:
 	jr	$ra
 
 newBars:
-	div	$a0,	$a0,	$a1
-	sw	$a0,	4($sp)
+	# This function calculates the number of BobCat Bars a user will receive based on n.
+	# It takes in 2 arguments ($a0, $a1) as number of wrappers left so far and n.
+	div	$t0,	$a0,	$a1	# calculate
+	
+	mul	$t1,	$a1,	$t0	# prepare to subtract from original amount
+	
+	sub	$a0,	$a0,	$t1	# sub wrappers from total wrappers
+	
+	add	$t3,	$t0,	$a0	# add number of unused wrappers
+	add	$t2,	$t0,	$t2	# keep a counter of total bars acquired from  exchanged
+					
+	#sw	$t0,	4($sp)
+	
+	beq	$t0,	$zero,	skip	# This is the case where you acquire no additional bars. 
 	
 	li	$v0,	4
 	la	$a0,	another
 	syscall		# prints out "You will get another..."
         
-	lw	$a0,	4($sp)
+        add	$a0,	$t0,	$zero
+        
+	#lw	$a0,	4($sp)
 	li	$v0,	1
 	syscall		# prints out how many more we got on this round
 	
@@ -165,8 +179,11 @@ newBars:
 	syscall		# append "bars" to the end of the amount.
 	
 	# This bit is really important.
-	lw	$a0,	4($sp)
+	#lw	$a0,	4($sp)
+	add	$a0,	$t3,	$zero
 	jal	maxBars
+	
+	skip:
 	
 	# Now we've returned...
 	lw	$a0,	4($sp)
