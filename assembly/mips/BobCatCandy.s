@@ -1,9 +1,11 @@
 #
-#  BobCatCandy.s
+#	BobCatCandy.s
 #
 #
-#  Created by Anthony Sainez on 5/1/20.
-#  Collaborated with Aaron Norstrom.
+# 	Created by Anthony Sainez on 5/1/2020.
+# 	Collaborated with Aaron Norstrom.
+#
+#	This is the correct version, as of 5/4/2020.
 #
 
 .data
