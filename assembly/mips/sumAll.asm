@@ -1,5 +1,5 @@
 #
-#  sumAll.s
+#  sumAll.asm
 #  
 #
 #  Created by Anthony Sainez on 3/30/20.

@@ -1,5 +1,5 @@
 #
-#  recursion.s
+#  recursion.asm
 #
 #
 #  Created by Anthony Sainez on 4/17/20.
