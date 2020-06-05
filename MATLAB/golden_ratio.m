@@ -29,3 +29,13 @@ r(1) = 1;
 for i = 2:10
     r(i) = ri(F(i), F(i-1));
 end
+
+x = linspace(1, 10, 10);
+
+plot(x, r, 'LineWidth', 3)
+hold on
+
+plot (x, r(length(r)), 'r*', 'LineWidth', 2)
+
+ylim([0.6, 2.3])
+hold off
