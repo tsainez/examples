@@ -13,6 +13,7 @@
     Assumption: enough space has been allocated for s1 to store the extra
     characters.
 */
+
 char* append (char s1[ ], char s2[ ]) {
     int s1len = strlen (s1);
     int s2len = strlen (s2);
