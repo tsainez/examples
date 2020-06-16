@@ -1,6 +1,4 @@
-# c
-
-## Appendix
+# C Code Appendix
 
 * [appendTest.c](appendTest.c)
 	* Contains a function that appends one string to another. 
@@ -30,5 +28,7 @@
 	* Repeats a phrase with a typo included at a specific point. 
 * [swapArray.c](swapArray.c)
 	* Swaps the contents of two arrays. 
+* [wordsearch.c](wordsearch/wordsearch.c)
+	* Program that searches for given words in a crossword puzzle provided at runtime. 
 
 *Last updated June 15, 2020*
