@@ -37,7 +37,7 @@
      end
 
     % While Loops
-     while [conditional expression] 
+     while x < 1
         ...
      end
     
