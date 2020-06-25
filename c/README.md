@@ -30,5 +30,7 @@
 	* Swaps the contents of two arrays. 
 * [wordsearch.c](wordsearch/wordsearch.c)
 	* Program that searches for given words in a crossword puzzle provided at runtime. 
+* [fizzbuzz.c](fizzbuzz.c)
+    * Classic fizzbuzz programming challenge completed in C.
 
 *Last updated June 15, 2020*
