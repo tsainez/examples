@@ -1,4 +1,5 @@
 .DS_Store
+.idea
 *.swp
 .vscode/*
 .vscode/settings.json
@@ -46,3 +47,8 @@ c/.idea/vcs.xml
 c/.idea/modules.xml
 c/.idea/misc.xml
 c/.idea/c.iml
+/shelf/
+/workspace.xml
+/dataSources/
+/dataSources.local.xml
+/httpRequests/
