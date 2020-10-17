@@ -1,20 +1,18 @@
 //
-// GoodHeuristic
+// 	GoodHeuristic
 //
-// This class extends the Heuristic class, providing a reasonable
-// implementation of the heuristic function method. The provided "good"
-// heuristic function is admissible.
+// 	This class extends the Heuristic class, providing a reasonable
+// 	implementation of the heuristic function method. The provided "good"
+// 	heuristic function is admissible.
 //
-// Anthony Sainez -- 16 October 2020
+// 	Anthony Sainez -- 16 October 2020
 //
-
-
-// IMPORT ANY PACKAGES THAT YOU NEED.
 
 public class GoodHeuristic extends Heuristic {
 	public RoadMap map;
 	public double velocity;
 
+	// Constructor
 	public GoodHeuristic(RoadMap map, Location destination) {
 		this.map = map;
 		this.velocity = velocity();
@@ -25,10 +23,22 @@ public class GoodHeuristic extends Heuristic {
 	// given search tree node. Note that the given Node should not be
 	// modified within the body of this function.
 	public double heuristicValue(Node thisNode) {
-		return (timeCost(thisNode.loc, destination) / velocity);
+		/*
+		// If you want to remove the timeCost function, you can do it this way, too.
+		double x, y;
+
+		x = thisNode.loc.latitude - destination.latitude;
+		y = thisNode.loc.longitude - destination.longitude;
+
+		Math.hypot(x, y);
+
+		return Math.hypot(x, y) / velocity;
+		 */
+		return (timeCost(thisNode.loc, destination) / velocity); // I'm a bigger fan of one-liners, though.
 	}
 
-	// Velocity helps find the minimum cost route which is admissible heuristic function.
+	// Helps find the minimum cost route.
+	// "Want to preserve velocity."
 	public double velocity() {
 		double temp, velocity = 0.0;
 
