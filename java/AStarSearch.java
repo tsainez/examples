@@ -1,87 +1,78 @@
-//A* search Pseudocode from the lecture slides is same as Pseudocode from the Uniform Cost search from lecture slides
-//only difference is A* is using Heuristic function and GoodHeuristic function
-//also A* is f = g +h
+//
+// AStarSearch
+//
+// This class implements the A* search algorithm. Uses f = g + h.
+//
+// Anthony Sainez -- 16 October 2020
+//
+
 import java.util.*;
 
 public class AStarSearch {
-    //initialize the frontier with initial/sharing location
-    public SortedFrontier frontier = new SortedFrontier(SortBy.f);
-    //initialize the explored set
-    public Set<String> explore = new HashSet<String>();
+    // Data Declaration Section
     public RoadMap graph;
     public String initialLoc, destinationLoc;
-    public int limit, expansionCount=0;
+    public int limit, expansionCount;
     public Heuristic heuristic;
 
-    //AStarSearch(graph, initialLoc, destinationLoc, limit);
+    // Constructor Function
     public AStarSearch(RoadMap graph, String initialLoc, String destinationLoc, int limit, SearchDisplay display) {
         this.heuristic = new GoodHeuristic(graph,graph.findLocation(destinationLoc));
         this.graph= graph;
         this.initialLoc= initialLoc;
         this.destinationLoc = destinationLoc;
-        this.limit = limit - 1;
+        this.limit = limit;
 
     }
-    public Node search(boolean checkvertex) {
-        //if frontier is empty then return failure
-        while(!frontier.isEmpty()) {
-            //chose leaf node and remove from frontier -> fronitier.removeTop()
-            frontier.removeTop();
-        }
-        explore.clear();
-        expansionCount =0;
-        Node parent = new Node(graph.findLocation(initialLoc));
 
-        if(initialLoc == destinationLoc) {
-            return parent;
-        }
-        frontier.addSorted(parent);
-        explore.add(parent.loc.name);
-        //for each action in problem.ACTIONS(node.STATE)
-        while(!frontier.isEmpty() && parent.depth < limit)
-        {
-            //chose leaf node and remove from frontier
-            parent = frontier.removeTop();
-            //if leaf node is destination, return parent node
-            if(parent.isDestination(destinationLoc))
-            {
-                return parent;
-            }
-            //explore and expand
-            parent.expand(heuristic); expansionCount++;
-            //if the checkvertex is false
-            if(!checkvertex) {
-                frontier.addSorted(parent.children);
-            }
-            //if the checkvertex is true
-            else
-            {
-                for(Node i: parent.children)
-                {
-                    //if child state is not explored or frontier
-                    if(!explore.contains(i.loc.name))
-                    {
-                        //frontier INSERT(child,frontier)
+    // Required Search Function
+    public Node search(boolean checkvertex) {
+        SortedFrontier frontier = new SortedFrontier(SortBy.f);
+        HashSet<String> explore = new HashSet<String>();
+
+
+        while(!frontier.isEmpty())
+            frontier.removeTop();
+
+        explore.clear();
+        expansionCount = 0;
+        Node iNode = new Node(graph.findLocation(initialLoc));
+
+        // We are already here!
+        if(initialLoc == destinationLoc)
+            return iNode;
+
+        frontier.addSorted(iNode);
+        explore.add(iNode.loc.name);
+
+        while(!frontier.isEmpty() && iNode.depth < limit) {
+            iNode = frontier.removeTop();
+
+            if(iNode.isDestination(destinationLoc))
+                return iNode;
+
+            iNode.expand(heuristic); expansionCount++;
+
+            if(!checkvertex)
+                frontier.addSorted(iNode.children);
+
+            else {
+                for (Node i: iNode.children) {
+                    if (!explore.contains(i.loc.name)) {
                         frontier.addSorted(i);
                         explore.add(i.loc.name);
-                        //if child state is explored or frontier
-                    }else
-                    {
-                        if(frontier.contains(i.loc.name))
-                        {
-                            //find higher PATH-COST
+                    } else {
+                        if (frontier.contains(i.loc.name)) {
                             Node higher = frontier.find(i);
-                            if(i.partialPathCost <higher.partialPathCost)
-                            {
-                                //replace that frontier node with child
+                            if (i.partialPathCost <higher.partialPathCost) {
                                 frontier.remove(higher);
                                 frontier.addSorted(i);
                             }
                         }
                     }
-                }
+                } // end for (Node i: parent.children)
             }
-        }
+        } // end while(!frontier.isEmpty() && parent.depth < limit)
         return null;
     }
 
