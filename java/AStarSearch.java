@@ -1,9 +1,11 @@
 //
-// AStarSearch
+//  AStarSearch
 //
-// This class implements the A* search algorithm. Uses f = g + h.
+//  This class implements the A* search algorithm. Uses f = g + h.
+//  It does not use the searchDisplay display utility.
+//  Upon submission, it matches the test logs provided.
 //
-// Anthony Sainez -- 16 October 2020
+//  Anthony Sainez -- 16 October 2020
 //
 
 import java.util.*;
@@ -26,17 +28,14 @@ public class AStarSearch {
     }
 
     // Required Search Function
-    public Node search(boolean checkvertex) {
+    public Node search(boolean stateChecking) {
         SortedFrontier frontier = new SortedFrontier(SortBy.f);
+        Node iNode = new Node(graph.findLocation(initialLoc));
         HashSet<String> explore = new HashSet<String>();
-
+        expansionCount = 0;
 
         while(!frontier.isEmpty())
             frontier.removeTop();
-
-        explore.clear();
-        expansionCount = 0;
-        Node iNode = new Node(graph.findLocation(initialLoc));
 
         // We are already here!
         if(initialLoc == destinationLoc)
@@ -53,10 +52,7 @@ public class AStarSearch {
 
             iNode.expand(heuristic); expansionCount++;
 
-            if(!checkvertex)
-                frontier.addSorted(iNode.children);
-
-            else {
+            if(stateChecking) {
                 for (Node i: iNode.children) {
                     if (!explore.contains(i.loc.name)) {
                         frontier.addSorted(i);
@@ -71,6 +67,8 @@ public class AStarSearch {
                         }
                     }
                 } // end for (Node i: parent.children)
+            } else { // stateChecking != true
+                frontier.addSorted(iNode.children);
             }
         } // end while(!frontier.isEmpty() && parent.depth < limit)
         return null;
