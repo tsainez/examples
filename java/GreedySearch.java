@@ -1,75 +1,79 @@
-import java.io.*;
+//
+// GreedySearch
+//
+// This class implements the greedy search algorithm.
+//  It does not use the searchDisplay display utility.
+//  Upon submission, it matches the test logs provided.
+//
+// Anthony Sainez -- 16 October 2020
+//
+
 import java.util.*;
 
 public class GreedySearch {
     public int limit, expansionCount;
     public String initialLoc, destinationLoc;
     public RoadMap graph;
-    public SearchDisplay display;
 
+    // Constructor
     public GreedySearch(RoadMap graph, String initialLoc, String destinationLoc, int limit, SearchDisplay display) {
         this.initialLoc = initialLoc;
         this.graph = graph;
-        this.destinationLoc= destinationLoc;
+        this.destinationLoc = destinationLoc;
         this.limit = limit;
     }
 
-    public int getExpansionCount() {
-        return expansionCount;
-    }
-
-    public Node search(boolean repeatedState) {
-        Node initialNode = new Node(graph.findLocation(initialLoc));
+    // Required Search Function
+    public Node search(boolean stateChecking) {
+        GoodHeuristic val = new GoodHeuristic(graph, graph.findLocation(destinationLoc));
         SortedFrontier priorityQueue = new SortedFrontier(SortBy.h);
-        priorityQueue.addSorted(initialNode);
-
+        Node iNode = new Node(graph.findLocation(initialLoc));
         HashSet<String> visitedNodes = new HashSet<String>();
-
+        priorityQueue.addSorted(iNode);
         expansionCount = 0;
 
-        GoodHeuristic val = new GoodHeuristic(graph, graph.findLocation(destinationLoc));
-
-        if (repeatedState) {
+        if (stateChecking) {
             while(true) {
                 if (priorityQueue.isEmpty())
                     return null;
 
-                initialNode = priorityQueue.removeTop();
+                iNode = priorityQueue.removeTop();
 
-                if (initialNode.isDestination(destinationLoc))
-                    return initialNode;
+                // We are already here!
+                if (iNode.isDestination(destinationLoc))
+                    return iNode;
 
-                if(!visitedNodes.contains(initialNode.loc.name)) {
-                    visitedNodes.add(initialNode.loc.name);
-                    initialNode.heuristicValue = val.heuristicValue(initialNode);
-                    initialNode.expand(val); expansionCount++;
+                if(!visitedNodes.contains(iNode.loc.name)) {
+                    visitedNodes.add(iNode.loc.name);
+                    iNode.heuristicValue = val.heuristicValue(iNode);
+                    iNode.expand(val); expansionCount++;
                 }
 
-                for(Node i: initialNode.children) {
-                    if(!visitedNodes.contains(i.loc.name) && !priorityQueue.contains(i.loc.name)) {
+                for (Node i: iNode.children) {
+                    if (!visitedNodes.contains(i.loc.name) && !priorityQueue.contains(i.loc.name)) {
                         priorityQueue.addSorted(i);
-                    } else if (priorityQueue.contains(i) && i.partialPathCost >= initialNode.partialPathCost) {
-                        priorityQueue.remove(initialNode);
+                    } else if (priorityQueue.contains(i) && i.partialPathCost >= iNode.partialPathCost) {
+                        priorityQueue.remove(iNode);
                         priorityQueue.addSorted(i);
                     }
-                } // end for
+                } // end for (Node i: initialNode.children)
 
                 if (priorityQueue.isEmpty())
                     return null;
             }
-        } else { // repeatedState != true
-            while(!priorityQueue.isEmpty() && initialNode.depth < limit) {
-                initialNode = priorityQueue.removeTop();
+        } else { // stateChecking != true
+            while (!priorityQueue.isEmpty() && iNode.depth < limit) {
+                iNode = priorityQueue.removeTop();
 
-                if (initialNode.isDestination(destinationLoc))
-                    return initialNode;
+                if (iNode.isDestination(destinationLoc))
+                    return iNode;
 
-                initialNode.heuristicValue = val.heuristicValue(initialNode);
-                initialNode.expand(val); expansionCount++;
+                iNode.heuristicValue = val.heuristicValue(iNode);
+                iNode.expand(val); expansionCount++;
 
-                priorityQueue.addSorted(initialNode.children);
+                priorityQueue.addSorted(iNode.children);
             }
             return null;
-        }
+        } // end else
     }
 }
