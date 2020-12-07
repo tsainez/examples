@@ -1,14 +1,17 @@
 //
-// Created by Anthony Sainez on 10/6/20.
+//  bucketSort.cpp
 //
-// Sources Used
-//  *   I used the textbook, notes taken during the lectures,
-//      companion material from the textbook.
-//  *   Using vectors to represent the buckets was significantly easier.
-//  *   I updated the assignment to include my own insertion sort function
-//      which was written to take in a vector input instead of using
-//      the standard algorithm library. It may be less readable, but it's
-//      correct.
+//  Created by Anthony Sainez on 6 October 2020.
+//  Copyright © 2020 Anthony Sainez. All rights reserved.
+//
+//  Sources Used
+//      *   I used the textbook, notes taken during the lectures,
+//          companion material from the textbook.
+//      *   Using vectors to represent the buckets was significantly easier.
+//      *   I updated the assignment to include my own insertion sort function
+//          which was written to take in a vector input instead of using
+//          the standard algorithm library. It may be less readable, but it's
+//          correct.
 //
 
 #include <iostream>

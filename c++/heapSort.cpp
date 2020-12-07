@@ -1,15 +1,18 @@
 //
-// Created by Anthony Sainez on 10/6/20.
+//  heapSort.cpp
 //
-// Sources Used
-//  *   I used the textbook, notes taken during the lectures,
-//      companion material from the textbook.
-//  *   I watched this video here for a refresher on the topic,
-//      and I used the lecture slides he linked in the video
-//      description. https://www.youtube.com/watch?v=2DmK_H7IdTo
-//  *   I used the standard library swap function because I thought
-//      that writing out what it does in full is significantly
-//      less readable.
+//  Created by Anthony Sainez on 6 October 2020.
+//  Copyright © 2020 Anthony Sainez. All rights reserved.
+//
+//  Sources Used
+//      *   I used the textbook, notes taken during the lectures,
+//          companion material from the textbook.
+//      *   I watched this video here for a refresher on the topic,
+//          and I used the lecture slides he linked in the video
+//          description. https://www.youtube.com/watch?v=2DmK_H7IdTo
+//      *   I used the standard library swap function because I thought
+//          that writing out what it does in full is significantly
+//          less readable.
 //
 
 #include <iostream>

@@ -1,13 +1,16 @@
 //
-// Created by Anthony Sainez on 9/2/20.
+//  binarySearch.cpp
 //
-// Sources Used
-//  *   I used the textbook, notes taken during the lectures,
-//      companion material from the textbook.
-//  *   I implemented some old code I had from a different class,
-//      where I used a recursive binary search. Adapting it over
-//      for this class was super easy. Here's the code:
-//      https://github.com/tsainez/examples/blob/master/c%2B%2B/Recursion.cpp
+//  Created by Anthony Sainez on 2 September 2020.
+//  Copyright © 2020 Anthony Sainez. All rights reserved.
+//
+//  Sources Used
+//      *   I used the textbook, notes taken during the lectures,
+//          companion material from the textbook.
+//      *   I implemented some old code I had from a different class,
+//          where I used a recursive binary search. Adapting it over
+//          for this class was super easy. Here's the code:
+//          https://github.com/tsainez/examples/blob/master/c%2B%2B/Recursion.cpp
 //
 
 #include<iostream>

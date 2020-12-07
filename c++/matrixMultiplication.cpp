@@ -1,16 +1,19 @@
 //
-// Created by Anthony Sainez on 11/30/20.
+//  matrixMultiplication.cpp
 //
-// Sources Used
-//  *   I used the textbook, notes taken during the lectures,
-//      companion material from the textbook.
-//  *   https://www.geeksforgeeks.org/double-pointer-pointer-pointer-c/
-//      For help in figuring out how to manage my pointers and arrays.
-//      For some reason, getting it to work with the normal arr[][] brackets
-//      notation was frustratingly not working.
-//  *   I sought out some help from the ACM discord members. They helped me
-//      with the notation of this particular lab. I do not know who they were,
-//      as their names were anonymous.
+//  Created by Anthony Sainez on 30 November 2020.
+//  Copyright © 2020 Anthony Sainez. All rights reserved.
+//
+//  Sources Used
+//      *   I used the textbook, notes taken during the lectures,
+//          companion material from the textbook.
+//      *   https://www.geeksforgeeks.org/double-pointer-pointer-pointer-c/
+//          For help in figuring out how to manage my pointers and arrays.
+//          For some reason, getting it to work with the normal arr[][] brackets
+//          notation was frustratingly not working.
+//      *   I sought out some help from the ACM discord members. They helped me
+//          with the notation of this particular lab. I do not know who they were,
+//          as their names were anonymous.
 //
 
 #include <iostream>

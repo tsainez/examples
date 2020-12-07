@@ -1,12 +1,15 @@
 //
-// Created by Anthony Sainez on 9/2/20.
+//  insertionSort.cpp
 //
-// Sources Used
-//  *   I used the textbook, notes taken during the lectures,
-//      companion material from the textbook.
-//  *   I used some prior code I wrote in an earlier class taken.
-//      The specific code can be viewed at the following link:
-//      https://github.com/tsainez/examples/blob/master/c%2B%2B/Sorting.cpp
+//  Created by Anthony Sainez on 2 September 2020.
+//  Copyright © 2020 Anthony Sainez. All rights reserved.
+//
+//  Sources Used
+//      *   I used the textbook, notes taken during the lectures,
+//          companion material from the textbook.
+//      *   I used some prior code I wrote in an earlier class taken.
+//          The specific code can be viewed at the following link:
+//          https://github.com/tsainez/examples/blob/master/c%2B%2B/Sorting.cpp
 //
 
 #include <iostream>
