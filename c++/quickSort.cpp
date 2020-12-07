@@ -1,14 +1,16 @@
 //
-// Created by Anthony Sainez on 10/9/20.
+//  quickSort.cpp
 //
-// Sources Used
-//  *   I used the textbook, notes taken during the lectures,
-//      companion material from the textbook.
-//  *   I used the helpful link that was provided in the lab
-//      file. http://www.cplusplus.com/reference/cstdlib/rand/
-//  *   I used the http://www.cplusplus.com/reference as a
-//      source when I look at examples online. That, and w3schools.
-//      They provide pretty easy to read and clear documentation.
+//  Created by Anthony Sainez on 9 October 2020.
+//
+//  Sources Used
+//      *   I used the textbook, notes taken during the lectures,
+//          companion material from the textbook.
+//      *   I used the helpful link that was provided in the lab
+//          file. http://www.cplusplus.com/reference/cstdlib/rand/
+//      *   I used the http://www.cplusplus.com/reference as a
+//          source when I look at examples online. That, and w3schools.
+//          They provide pretty easy to read and clear documentation.
 //
 
 #include <iostream> /* cout, cin */
