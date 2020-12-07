@@ -1,12 +1,16 @@
 //
-// Created by Anthony Sainez on 10/2/20.
+//  maxSubArray.cpp
 //
-// Sources Used
-//  *   I used the textbook, notes taken during the lectures,
-//      companion material from the textbook.
-//  *   http://www.cplusplus.com/reference/climits/
-//  *   https://en.cppreference.com/w/cpp/algorithm/max
-//  *   https://en.wikipedia.org/wiki/Maximum_subarray_problem
+//  Created by Anthony Sainez on 2 October 2020.
+//  Copyright © 2020 Anthony Sainez. All rights reserved.
+//
+//  Sources Used
+//      *   I used the textbook, notes taken during the lectures,
+//          companion material from the textbook.
+//      *   http://www.cplusplus.com/reference/climits/
+//      *   https://en.cppreference.com/w/cpp/algorithm/max
+//      *   https://en.wikipedia.org/wiki/Maximum_subarray_problem
+//
 
 #include <iostream>
 #include <climits>      // for INT_MIN
