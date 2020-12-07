@@ -2,8 +2,8 @@
 //  wordsearch.c
 //
 //
-//  Created by Anthony Sainez on 2/29/2020.
-//  Modified 4/23/2020.
+//  Created by Anthony Sainez on 29 February 2020.
+//  Modified 23 April 2020.
 //
 
 #include <stdio.h>
