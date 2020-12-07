@@ -1,15 +1,18 @@
 //
-// Created by Anthony Sainez on 10/30/20.
+//  hashTableChaining.cpp
 //
-// Sources Used
-//  *   I used the textbook, notes taken during the lectures,
-//      companion material from the textbook.
-//          * page 258
-//  *   https://en.cppreference.com/w/Main_Page
-//  *   https://www.cplusplus.com/reference/sstream/stringstream/
-//  *   I used some of my old code I wrote from my days at Gavilan college,
-//      where my teacher had me write a hash table program in Java. It was horrible,
-//      and worst of all: it didn't even count towards my degree.
+//  Created by Anthony Sainez on 30 October 2020.
+//  Copyright © 2020 Anthony Sainez. All rights reserved.
+//
+//  Sources Used
+//      *   I used the textbook, notes taken during the lectures,
+//          companion material from the textbook.
+//              * page 258
+//      *   https://en.cppreference.com/w/Main_Page
+//      *   https://www.cplusplus.com/reference/sstream/stringstream/
+//      *   I used some of my old code I wrote from my days at Gavilan college,
+//          where my teacher had me write a hash table program in Java. It was horrible,
+//          and worst of all: it didn't even count towards my degree.
 //
 
 #include <iostream>
