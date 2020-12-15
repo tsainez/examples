@@ -64,7 +64,6 @@ int main() {
     for(int i = 0; i < n; i++)
         cin >> arr[i];
     
-    
     bucketSort(arr, n);
     
     for(int i = 0; i < n; i++)
