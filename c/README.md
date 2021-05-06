@@ -1,4 +1,4 @@
-# C Code Appendix
+# Appendix
 
 * [appendTest.c](appendTest.c)
 	* Contains a function that appends one string to another. 
