@@ -1,8 +1,3 @@
-# Short test case for your project.
-#
-# Note that this is by no means a comprehensive test!
-#
-
 # Compute the sum of N integers: 1 + 2 + 3 + ... + N
 # In this case, N = 5.
 
