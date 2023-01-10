@@ -1,3 +1,7 @@
+//  Try running it like so to see something interesting!
+//      gcc -o cpu cpu.c -Wall
+//      ./cpu A & ; ./cpu B & ; ./cpu C & ; ./cpu D &     
+
 // Simple Example: Code That Loops And Prints (cpu.c)
 #include <stdio.h>
 #include <stdlib.h>
