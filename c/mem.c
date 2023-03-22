@@ -1,39 +1,23 @@
 //
 // mem.c
 //
-// Created by Anthony Sainez on 20 February 2020
-// Copyright © 2020 Anthony Sainez. All rights reserved.
-//
 
+#include <unistd.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <stdlib.h> // for malloc
 
-int main() {
-    int num;
-    int *ptr;
-    int **handle;
-    
-    num = 14;
-    ptr = (int *)malloc(2 * sizeof(int));
-    *ptr = num;
-    handle = (int **)malloc(1 * sizeof(int *));
-    *handle = ptr;
-    
-    // Insert extra code here
-    printf("num address: %p\n", &num);
-    printf("ptr address: %p\n", &ptr);
-    printf("*ptr address: %p\n", &(*ptr));
-    printf("handle address: %p\n", &handle);
-    printf("*handle address: %p\n", &(*handle));
-    printf("**handle address: %p\n", &(**handle));
-    
-    printf("ptr returns: %p\n", ptr);
-    printf("*ptr returns: %d\n", *ptr);
-    
-    free(ptr);
-    free(handle);
-    
+int main(int argc, char *argv[]) {
+    int *p = malloc(sizeof(int));
+    assert(p != NULL);
+    printf("(%d) address pointed to by p: %p\n",
+            getpid(), p);
+    *p = 0;
+    while(1) {
+        Spin(1);
+        *p = *p + 1;
+        printf("(%d) p: %d\n", getpid(), *p);
+    }
+
     return 0;
-} 
+}
 
