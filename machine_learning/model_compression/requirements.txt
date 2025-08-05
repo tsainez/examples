@@ -1,0 +1,1 @@
+-e git+https://github.com/UCMerced-ML/LC-model-compression#egg=lc
