@@ -15,9 +15,6 @@ def factorial(n):
         return 1
     else:
         return n * factorial(n-1)
-        
-print('factorial(5):', factorial(5))
-# Expected 120
 
 def fib(n):
     pass # This is a null statement to prevent an error before code is added.
@@ -30,9 +27,6 @@ def fib(n):
         return 1
     else: 
         return fib(n-1)+fib(n-2) 
-        
-print('fib(8):', fib(8))
-# Expected 13
 
 def addup(list):
     pass # This is a null statement to prevent an error before code is added.
@@ -42,7 +36,14 @@ def addup(list):
     else:
         return list[0] + addup(list[1:])
 
-print('addup([1,2,3,4,5]):', addup([1,2,3,4,5]))
-# Expected 15
-print('addup(range(101)):', addup(range(101)))
-# Expected 5050
+if __name__ == '__main__':
+    print('factorial(5):', factorial(5))
+    # Expected 120
+
+    print('fib(8):', fib(8))
+    # Expected 13
+
+    print('addup([1,2,3,4,5]):', addup([1,2,3,4,5]))
+    # Expected 15
+    print('addup(range(101)):', addup(range(101)))
+    # Expected 5050

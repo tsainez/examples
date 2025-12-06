@@ -95,6 +95,38 @@ def matching(items):
         if pc == 0 and i < (len(items) - 1):
             return False
     return True
+
+def unit_length(items):
+    """
+    Calculates the length of the first logical unit in the list of items.
+    A unit is:
+    - A primitive (variable)
+    - A parenthesized expression (...)
+    - A negation followed by a unit -...
+    """
+    if not items:
+        return 0
+
+    first = items[0]
+
+    if first == '(':
+        pc = 1
+        for i in range(1, len(items)):
+            if items[i] == '(':
+                pc += 1
+            elif items[i] == ')':
+                pc -= 1
+
+            if pc == 0:
+                return i + 1
+        return len(items) # Fallback if unbalanced?
+
+    elif first == '-':
+        return 1 + unit_length(items[1:])
+
+    else:
+        # Assume primitive or single token
+        return 1
         
 
 def flatten(items):
@@ -125,26 +157,18 @@ def mainConnective(items):
         else:
             if pc == 0:
                 if items[i] == '-':
-                    if items[i+1] == '(':
-                        test = items[i+1:]
-                        if matching(test):
-                            stack.append(items[i])
-                            rhs = items[i+1:]
-                            if isPrimitive(lhs):
-                                stack.append(lhs)
-                            else:
-                                stack.append(mainConnective(lhs))
-            
-                            if isPrimitive(rhs):
-                                stack.append(rhs)
-                            else:
-                                stack.append(mainConnective(rhs))
-                            break
-                        else:
-                            lhs.append(items[i])
-            
-                
-                    elif i+1 == len(items)-1:
+                    # Check if this negation covers the entire remainder of the expression
+                    # This means '-' is the main connective (root)
+                    # We use unit_length to determine if items[i:] forms a single unit
+
+                    # We are looking at items[i]. items[i:] is the sequence starting with '-'
+                    # If unit_length(items[i:]) equals len(items) - i, it means
+                    # the rest of the list (including this '-') is a single unit.
+                    # e.g. ['-', 'a'] -> ul=2. len=2. Match.
+                    # ['-', 'a', 'and', 'b'] -> ul=2. len=4. No match.
+
+                    current_rest_len = len(items) - i
+                    if unit_length(items[i:]) == current_rest_len:
                         stack.append(items[i])
                         rhs = items[i+1:]
                         if isPrimitive(lhs):
@@ -159,9 +183,9 @@ def mainConnective(items):
                         break
                     else:
                         lhs.append(items[i])
-                        
-                else:
             
+                else:
+                    # Binary connective found at top level
                     stack.append(items[i])
                     rhs = items[i+1:]
             
@@ -317,4 +341,3 @@ class TruthTable:
         rows = rows[:-1]
         command = "\\begin{tabular}{%s}\n\\hline\n%s\\\\\n\\hline\n%s\n\\hline\n\\end{tabular}" % (align, header, rows)
         print(command)
-
