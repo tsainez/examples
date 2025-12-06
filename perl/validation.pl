@@ -9,6 +9,30 @@ use strict;
 use warnings;
 use diagnostics;
 
+=head1 NAME
+
+validation.pl - String validation and transformation utilities.
+
+=head1 DESCRIPTION
+
+This script provides subroutines to validate alphanumeric characters and
+transform animal names in a sentence according to specific rules.
+
+=cut
+
+=head2 validate_alphanumeric
+
+    validate_alphanumeric($string)
+
+Iterates through each character of the input string and prints it if it is alphanumeric.
+
+=over 4
+
+=item * C<$string> - The input string to validate.
+
+=back
+
+=cut
 sub validate_alphanumeric {
 	my ($string) = @_;
 	my @chars = split("", $string); # tokenize into individual characters, catching all
@@ -21,10 +45,25 @@ sub validate_alphanumeric {
 	}
 }
 
-validate_alphanumeric("This is alphanumeric. This is not: !@#"); 
+validate_alphanumeric("This is alphanumeric. This is not: !@#");
 
+=head2 search_for_animal
+
+    search_for_animal($string)
+
+Transforms animal names in the input string based on a cyclic rule:
+dog -> cat, cat -> mouse, mouse -> dog.
+Also handles plural forms: dogs -> cats, cats -> mice.
+
+=over 4
+
+=item * C<$string> - The input sentence containing animal names.
+
+=back
+
+=cut
 sub search_for_animal {
-	# RULES: 
+	# RULES:
 	# dog to cat
 	# cat to mouse
 	# mouse to dog
@@ -43,7 +82,7 @@ sub search_for_animal {
 
 			# We want to check plural, since if it doesn't catch it if it's plural,
 			# then it must be singular. If it's caught when it's singular, theres
-			# still one character left to check before we decide it's plural, but 
+			# still one character left to check before we decide it's plural, but
 			# you would skip over it.
 
 		} elsif ($word =~ /cat/) { # cats case, change to mice.

@@ -2,8 +2,24 @@ import sqlite3
 from sqlite3 import Error
 import math
 
+"""
+Executes a series of SQL queries and view creations on a TPC-H database.
+
+This script interacts with a SQLite database ("tpch.sqlite") to create various views
+aggregating customer, supplier, and order data, and then executes specific analytical
+queries (Q1-Q15), saving the results to output files.
+"""
 
 def openConnection(_dbFile):
+    """
+    Opens a connection to the SQLite database.
+
+    Args:
+        _dbFile (str): The path to the database file.
+
+    Returns:
+        sqlite3.Connection: The connection object if successful, None otherwise.
+    """
     print("++++++++++++++++++++++++++++++++++")
     print("Open database: ", _dbFile)
 
@@ -20,6 +36,13 @@ def openConnection(_dbFile):
 
 
 def closeConnection(_conn, _dbFile):
+    """
+    Closes the database connection.
+
+    Args:
+        _conn (sqlite3.Connection): The connection object to close.
+        _dbFile (str): The name of the database file (for logging purposes).
+    """
     print("++++++++++++++++++++++++++++++++++")
     print("Close database: ", _dbFile)
 
@@ -33,6 +56,12 @@ def closeConnection(_conn, _dbFile):
 
 
 def create_View1(_conn):
+    """
+    Creates View V1 combining customer, nation, and region data.
+
+    Args:
+        _conn (sqlite3.Connection): The database connection object.
+    """
     print("++++++++++++++++++++++++++++++++++")
     print("Create V1")
     _conn.cursor().execute('DROP VIEW IF EXISTS V1;')
@@ -70,6 +99,12 @@ def create_View1(_conn):
 
 
 def create_View2(_conn):
+    """
+    Creates View V2 combining supplier, nation, and region data.
+
+    Args:
+        _conn (sqlite3.Connection): The database connection object.
+    """
     print("++++++++++++++++++++++++++++++++++")
     print("Create V2")
 
@@ -106,6 +141,12 @@ def create_View2(_conn):
 
 
 def create_View5(_conn):
+    """
+    Creates View V5 containing orders data with a formatted year.
+
+    Args:
+        _conn (sqlite3.Connection): The database connection object.
+    """
     print("++++++++++++++++++++++++++++++++++")
     print("Create V5")
 
@@ -140,6 +181,12 @@ def create_View5(_conn):
 
 
 def create_View10(_conn):
+    """
+    Creates View V10 aggregating max and min discounts by part type.
+
+    Args:
+        _conn (sqlite3.Connection): The database connection object.
+    """
     print("++++++++++++++++++++++++++++++++++")
     print("Create V10")
 
@@ -161,6 +208,12 @@ def create_View10(_conn):
 
 
 def create_View151(_conn):
+    """
+    Creates View V151 for customers with positive account balances.
+
+    Args:
+        _conn (sqlite3.Connection): The database connection object.
+    """
     print("++++++++++++++++++++++++++++++++++")
     print("Create V151")
 
@@ -181,6 +234,12 @@ def create_View151(_conn):
 
 
 def create_View152(_conn):
+    """
+    Creates View V152 for suppliers with negative account balances.
+
+    Args:
+        _conn (sqlite3.Connection): The database connection object.
+    """
     print("++++++++++++++++++++++++++++++++++")
     print("Create V152")
 
@@ -201,6 +260,12 @@ def create_View152(_conn):
 
 
 def Q1(_conn):
+    """
+    Executes Query 1: Total price by customer in France in 1995.
+
+    Args:
+        _conn (sqlite3.Connection): The database connection object.
+    """
     print("++++++++++++++++++++++++++++++++++")
     print("Q1")
     with open('output/1.out', 'w') as outfile:
@@ -213,6 +278,12 @@ def Q1(_conn):
 
 
 def Q2(_conn):
+    """
+    Executes Query 2: Count of suppliers by region.
+
+    Args:
+        _conn (sqlite3.Connection): The database connection object.
+    """
     print("++++++++++++++++++++++++++++++++++")
     print("Q2")
 
@@ -232,6 +303,12 @@ def Q2(_conn):
 
 
 def Q3(_conn):
+    """
+    Executes Query 3: Count of orders by nation in America.
+
+    Args:
+        _conn (sqlite3.Connection): The database connection object.
+    """
     print("++++++++++++++++++++++++++++++++++")
     print("Q3")
     with open('output/3.out', 'w') as outfile:
@@ -252,6 +329,12 @@ def Q3(_conn):
 
 
 def Q4(_conn):
+    """
+    Executes Query 4: Count of small parts supplied by Canadian suppliers.
+
+    Args:
+        _conn (sqlite3.Connection): The database connection object.
+    """
     print("++++++++++++++++++++++++++++++++++")
     print("Q4")
     with open('output/4.out', 'w') as outfile:
@@ -275,6 +358,12 @@ def Q4(_conn):
 
 
 def Q5(_conn):
+    """
+    Executes Query 5: Count of orders by German customers in 1993.
+
+    Args:
+        _conn (sqlite3.Connection): The database connection object.
+    """
     print("++++++++++++++++++++++++++++++++++")
     print("Q5")
     with open('output/5.out', 'w') as outfile:
@@ -296,6 +385,12 @@ def Q5(_conn):
 
 
 def Q6(_conn):
+    """
+    Executes Query 6: Count of distinct parts by Canadian suppliers and order priority.
+
+    Args:
+        _conn (sqlite3.Connection): The database connection object.
+    """
     print("++++++++++++++++++++++++++++++++++")
     print("Q6")
     with open('output/6.out', 'w') as outfile:
@@ -326,6 +421,12 @@ def Q6(_conn):
 
 
 def Q7(_conn):
+    """
+    Executes Query 7: Count of orders by nation in America and order status.
+
+    Args:
+        _conn (sqlite3.Connection): The database connection object.
+    """
     print("++++++++++++++++++++++++++++++++++")
     print("Q7")
     with open('output/7.out', 'w') as outfile:
@@ -348,6 +449,12 @@ def Q7(_conn):
 
 
 def Q8(_conn):
+    """
+    Executes Query 8: Suppliers with more than 50 orders in 1995 with status 'F'.
+
+    Args:
+        _conn (sqlite3.Connection): The database connection object.
+    """
     print("++++++++++++++++++++++++++++++++++")
     print("Q8")
     with open('output/8.out', 'w') as outfile:
@@ -374,6 +481,12 @@ def Q8(_conn):
 
 
 def Q9(_conn):
+    """
+    Executes Query 9: Count of distinct clerks handling orders from US suppliers.
+
+    Args:
+        _conn (sqlite3.Connection): The database connection object.
+    """
     print("++++++++++++++++++++++++++++++++++")
     print("Q9")
     with open('output/9.out', 'w') as outfile:
@@ -394,6 +507,12 @@ def Q9(_conn):
 
 
 def Q10(_conn):
+    """
+    Executes Query 10: Discount range for 'ECONOMY' and 'COPPER' parts.
+
+    Args:
+        _conn (sqlite3.Connection): The database connection object.
+    """
     print("++++++++++++++++++++++++++++++++++")
     print("Q10")
     with open('output/10.out', 'w') as outfile:
@@ -417,6 +536,12 @@ def Q10(_conn):
 
 
 def Q11(_conn):
+    """
+    Executes Query 11: Maximum supplier account balance by region.
+
+    Args:
+        _conn (sqlite3.Connection): The database connection object.
+    """
     print("++++++++++++++++++++++++++++++++++")
     print("Q11")
     with open('output/11.out', 'w') as outfile:
@@ -435,6 +560,12 @@ def Q11(_conn):
 
 
 def Q12(_conn):
+    """
+    Executes Query 12: Nations where max supplier account balance exceeds 9000.
+
+    Args:
+        _conn (sqlite3.Connection): The database connection object.
+    """
     print("++++++++++++++++++++++++++++++++++")
     print("Q12")
     with open('output/12.out', 'w') as outfile:
@@ -453,6 +584,12 @@ def Q12(_conn):
 
 
 def Q13(_conn):
+    """
+    Executes Query 13: Count of lineitems linking African suppliers and US customers.
+
+    Args:
+        _conn (sqlite3.Connection): The database connection object.
+    """
     print("++++++++++++++++++++++++++++++++++")
     print("Q13")
     with open('output/13.out', 'w') as outfile:
@@ -476,6 +613,12 @@ def Q13(_conn):
 
 
 def Q14(_conn):
+    """
+    Executes Query 14: Max order total price by supplier and customer regions.
+
+    Args:
+        _conn (sqlite3.Connection): The database connection object.
+    """
     print("++++++++++++++++++++++++++++++++++")
     print("Q14")
     with open('output/14.out', 'w') as outfile:
@@ -501,6 +644,12 @@ def Q14(_conn):
 
 
 def Q15(_conn):
+    """
+    Executes Query 15: Count of distinct orders involving positive balance customers and negative balance suppliers.
+
+    Args:
+        _conn (sqlite3.Connection): The database connection object.
+    """
     print("++++++++++++++++++++++++++++++++++")
     print("Q15")
     with open('output/15.out', 'w') as outfile:
@@ -522,6 +671,9 @@ def Q15(_conn):
 
 
 def main():
+    """
+    Main function to orchestrate the database operations and query execution.
+    """
     database = r"tpch.sqlite"
 
     # create a database connection

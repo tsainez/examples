@@ -7,6 +7,14 @@
 
 #import <stdio.h>
 
+/**
+ * Main function to write punishment lines with a deliberate typo.
+ *
+ * Prompts the user for the number of lines to write and the line number where a typo should occur.
+ * Validates the input and prints the lines, introducing the typo at the specified line.
+ *
+ * @return 0 on success, 1 on invalid input.
+ */
 int main() {
     int num, typo;
     

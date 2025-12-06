@@ -17,17 +17,28 @@
 // David Noelle -- Mon Nov 16 19:15:54 PST 2020
 //
 
-
+/**
+ * Provides static methods for evaluating game states in Zombie Dice.
+ *
+ * Includes functionality for calculating expected utility with look-ahead
+ * and heuristic evaluation for non-terminal states.
+ */
 public class Eval {
 
 	// Non-terminal states at this limit should be evaluated using
 	// the given heuristic evaluation function ...
+	/** Depth limit for the look-ahead search. */
 	static public int depth_limit = 3; 
 
-	// value -- This public function returns the payoff value of
-	// terminal states or the expected utility value of
-	// non-terminal states, backing up heuristic evaluation
-	// values once the given depth has reached the depth limit.
+	/**
+	 * Returns the payoff value of terminal states or the expected utility value of non-terminal states.
+	 *
+	 * Backs up heuristic evaluation values once the given depth has reached the depth limit.
+	 *
+	 * @param s The current game state.
+	 * @param depth The current depth in the search tree.
+	 * @return The estimated utility value of the state.
+	 */
 	static public double value(State s, int depth) {
 		// Stop searching once either a terminal state is reached or the
 		// depth limit is reached ...
@@ -48,17 +59,23 @@ public class Eval {
 		}
 	}
 
-	// value -- This public function returns the payoff value of
-	// terminal states or the expected utility value of
-	// non-terminal states, backing up heuristic evaluation
-	// values once the given depth has reached the depth limit.
+	/**
+	 * Returns the expected utility value of a state (default depth 0).
+	 *
+	 * @param s The current game state.
+	 * @return The estimated utility value of the state.
+	 */
 	static public double value(State s) {
 		return (Eval.value(s, 0));
 	}
 
-	// value_rolled_hand -- Compute the expected utility value of this
-	// state, given that the hand has just been
-	// rolled to the specified dice faces.
+	/**
+	 * Compute the expected utility value of this state, given that the hand has just been rolled to the specified dice faces.
+	 *
+	 * @param rolled_s The state after rolling the dice.
+	 * @param depth The current depth.
+	 * @return The expected utility value.
+	 */
 	static double value_rolled_hand(State rolled_s, int depth) {
 		State s = new State(rolled_s);
 		double val = 0.0; // return value
@@ -87,11 +104,15 @@ public class Eval {
 		return (val);
 	}
 
-	// value_roll_hand -- Compute the expected utility value of this
-	// state, given that the hand is full. Note that
-	// this function assumes that there are three dice
-	// in a hand (i.e., that the value of "have_size"
-	// is three).
+	/**
+	 * Compute the expected utility value of this state, given that the hand is full.
+	 *
+	 * Assumes there are three dice in the hand ready to be rolled.
+	 *
+	 * @param s The current state.
+	 * @param depth The current depth.
+	 * @return The expected utility value.
+	 */
 	static double value_roll_hand(State s, int depth) {
 		double val = 0.0; // return value
 
@@ -124,9 +145,13 @@ public class Eval {
 		return (val);
 	} 
 
-	// value_roll -- Compute the expected utility value of this state,
-	// given that the current player will be immediately
-	// drawing dice and rolling.
+	/**
+	 * Compute the expected utility value of this state, given that the current player will be immediately drawing dice and rolling.
+	 *
+	 * @param s The current state.
+	 * @param depth The current depth.
+	 * @return The expected utility value.
+	 */
 	static double value_roll(State s, int depth) {
 		double val = 0.0; // return value
 
@@ -167,9 +192,13 @@ public class Eval {
 		return (val);
 	}
 
-	// value_stop -- Compute the expected utility value of this state,
-	// given that the current player will not continue
-	// to roll at this point.
+	/**
+	 * Compute the expected utility value of this state, given that the current player will not continue to roll.
+	 *
+	 * @param stop_s The state where the player stops.
+	 * @param depth The current depth.
+	 * @return The expected utility value.
+	 */
 	static double value_stop(State stop_s, int depth) {
 		State s = new State(stop_s);
 		double val = 0.0; // return value
@@ -193,11 +222,15 @@ public class Eval {
 		return (val);
 	}
 
-	// value_choose -- Compute the expected utility value of each of two
-	// actions: rolling and stopping. Return the greater
-	// of these two values if the computer is the current
-	// player, and return the lesser of these two values
-	// if the user is the current player.
+	/**
+	 * Compute the expected utility value of each of two actions: rolling and stopping.
+	 *
+	 * Returns the greater value for the computer (MAX node) and the lesser value for the user (MIN node).
+	 *
+	 * @param s The current state.
+	 * @param depth The current depth.
+	 * @return The expected utility value of the best choice.
+	 */
 	static double value_choose(State s, int depth) {
 		double eu_roll; // expected utility value of rolling
 		double eu_stop; // expected utility value of stoping
@@ -237,12 +270,14 @@ public class Eval {
 		}
 	}
 
-	// heuristic -- Compute a heuristic evaluation function value for the
-	// specified State object. This function must be
-	// calculated quickly, with no look-ahead search, and it
-	// should be bounded between plus and minus the value of
-	// "State.win_payoff". The heuristic evaluation value
-	// is returned.
+	/**
+	 * Compute a heuristic evaluation function value for the specified State object.
+	 *
+	 * This function is calculated quickly with no look-ahead search.
+	 *
+	 * @param s The state to evaluate.
+	 * @return The heuristic evaluation value, bounded between plus and minus "State.win_payoff".
+	 */
 	static public double heuristic(State s) {
 		// Heuristic value to be returned ...
 		double value = 0.0;

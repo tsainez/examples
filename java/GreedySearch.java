@@ -10,12 +10,34 @@
 
 import java.util.*;
 
+/**
+ * Implements the Greedy Best-First Search algorithm.
+ *
+ * This class performs a greedy search on a given roadmap graph,
+ * attempting to find a path from an initial location to a destination.
+ * It uses a heuristic function to guide the search.
+ */
 public class GreedySearch {
-    public int limit, expansionCount;
-    public String initialLoc, destinationLoc;
+    /** The depth limit for the search (though greedy search doesn't strictly use depth limit like IDDFS). */
+    public int limit;
+    /** The number of nodes expanded during the search. */
+    public int expansionCount;
+    /** The name of the starting location. */
+    public String initialLoc;
+    /** The name of the destination location. */
+    public String destinationLoc;
+    /** The graph representing the map. */
     public RoadMap graph;
 
-    // Constructor
+    /**
+     * Constructor for GreedySearch.
+     *
+     * @param graph The map graph to search.
+     * @param initialLoc The starting location name.
+     * @param destinationLoc The destination location name.
+     * @param limit A limit on the search depth (used in non-state-checking mode).
+     * @param display A display utility (unused in this implementation but kept for compatibility).
+     */
     public GreedySearch(RoadMap graph, String initialLoc, String destinationLoc, int limit, SearchDisplay display) {
         this.initialLoc = initialLoc;
         this.graph = graph;
@@ -23,7 +45,12 @@ public class GreedySearch {
         this.limit = limit;
     }
 
-    // Required Search Function
+    /**
+     * Performs the Greedy Best-First Search.
+     *
+     * @param stateChecking If true, enables visited state checking to prevent cycles and redundant work.
+     * @return The goal Node if found, otherwise null.
+     */
     public Node search(boolean stateChecking) {
         GoodHeuristic val = new GoodHeuristic(graph, graph.findLocation(destinationLoc));
         SortedFrontier priorityQueue = new SortedFrontier(SortBy.h);
