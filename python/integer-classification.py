@@ -48,12 +48,13 @@ for i in range(10):
     newValue = int(input("Please input intArrayOdd[" + str(i) + "]: "))
     intArrayOdd.append(newValue)
 
-largest = 0 # arbitration
+largest = None
 for number in intArrayOdd:
-    if number % 2 != 0 and number > largest:
-        largest = number
+    if number % 2 != 0:
+        if largest is None or number > largest:
+            largest = number
 
-if largest == 0:
+if largest is None:
     print("There were no odd integers")
 else:
     print("The largest odd integer in the stack is " + str(largest) + ".")
