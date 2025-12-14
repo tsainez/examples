@@ -3,7 +3,21 @@
 # Computer Science and Engineering
 # University of California Merced
 
+"""
+This module provides functionality to generate truth tables for propositional logic formulas.
+It includes a parser for logical expressions and a TruthTable class to evaluate and display the tables.
+"""
+
 def generate(vars):
+    """
+    Generates all possible combinations of truth values for the given variables.
+
+    Args:
+        vars (list): A list of variable names (strings).
+
+    Returns:
+        list: A list of lists, where each inner list represents a row of truth values (0 or 1).
+    """
     values = [0, 1]
     command = ""
     count = 0
@@ -30,26 +44,84 @@ def generate(vars):
 
 
 def land(a, b):
+    """
+    Logical AND operation.
+
+    Args:
+        a (bool or int): First operand.
+        b (bool or int): Second operand.
+
+    Returns:
+        bool: Result of a AND b.
+    """
     return a and b
 
 
 def lor(a, b):
+    """
+    Logical OR operation.
+
+    Args:
+        a (bool or int): First operand.
+        b (bool or int): Second operand.
+
+    Returns:
+        bool: Result of a OR b.
+    """
     return a or b  
 
 
 def lnot(a):
+    """
+    Logical NOT operation.
+
+    Args:
+        a (bool or int): Operand.
+
+    Returns:
+        bool: Result of NOT a.
+    """
     return not a
 
 
 def lif(a, b):
+    """
+    Logical Implication (if...then) operation.
+
+    Args:
+        a (bool or int): Antecedent.
+        b (bool or int): Consequent.
+
+    Returns:
+        bool: Result of a -> b (equivalent to NOT a OR b).
+    """
     return not a or b
 
 
 def liff(a, b):
+    """
+    Logical Biconditional (if and only if) operation.
+
+    Args:
+        a (bool or int): First operand.
+        b (bool or int): Second operand.
+
+    Returns:
+        bool: Result of a <-> b.
+    """
     return (not a or b) and (not b or a)  
 
 
 def isPrimitive(formula):
+    """
+    Checks if a formula is primitive (contains no connectives or parentheses).
+
+    Args:
+        formula (list or str): The formula to check.
+
+    Returns:
+        bool: True if primitive, False otherwise.
+    """
     for i in formula:
         if isConnective(i) or i == '(' or i == ')':
             return False
@@ -57,6 +129,15 @@ def isPrimitive(formula):
 
 
 def reformat(formula):
+    """
+    Reformats a formula string to ensure proper spacing around connectives and parentheses.
+
+    Args:
+        formula (str): The input formula string.
+
+    Returns:
+        str: The reformatted formula string.
+    """
     temp = formula.split(' ')
     c = []
     for i in temp:
@@ -85,6 +166,15 @@ def reformat(formula):
 
 
 def matching(items):
+    """
+    Checks if parentheses in a list of items are balanced.
+
+    Args:
+        items (list): A list of formula components.
+
+    Returns:
+        bool: True if parentheses are balanced and not enclosing the entire expression unnecessarily, False otherwise.
+    """
     pc = 0
     for i in range(len(items)):
         if items[i] == '(':
@@ -98,6 +188,15 @@ def matching(items):
         
 
 def flatten(items):
+    """
+    Removes outer parentheses from a list of items if they enclose the entire expression.
+
+    Args:
+        items (list): A list of formula components.
+
+    Returns:
+        list: The flattened list of items.
+    """
     if len(items) > 0:
         while items[0] == '(' and items[-1] == ')' and matching(items):
             items = items[1:-1]
@@ -105,10 +204,28 @@ def flatten(items):
 
 
 def isConnective(s):
+    """
+    Checks if a string is a logical connective.
+
+    Args:
+        s (str): The string to check.
+
+    Returns:
+        bool: True if s is 'and', 'or', '->', '<->', or '-', False otherwise.
+    """
     return s == 'and' or s == 'or' or s == '->' or s == '<->' or s == '-'
 
 
 def mainConnective(items):
+    """
+    Identifies the main connective in a formula and parses it into a structured list.
+
+    Args:
+        items (list): A list of formula components.
+
+    Returns:
+        list: A structured list representing the parsed formula.
+    """
     items = flatten(items)
     stack = []
     lhs = []
@@ -184,12 +301,31 @@ def mainConnective(items):
 
 
 def process(formula):
+    """
+    Processes a formula string into a parsed structure.
+
+    Args:
+        formula (str): The input formula string.
+
+    Returns:
+        list: The parsed formula structure.
+    """
     formula = reformat(formula)
     items = formula.split(' ')
     return mainConnective(items)
 
     
 def substitute(stack, bl):
+    """
+    Substitutes variables in a parsed formula with their truth values.
+
+    Args:
+        stack (list): The parsed formula structure.
+        bl (dict): A dictionary mapping variables to truth values.
+
+    Returns:
+        list: The formula structure with values substituted.
+    """
     if stack[0] == '-':
         if isPrimitive(stack[2]):
             return [stack[0], stack[1], bl[stack[2][0]]]
@@ -207,7 +343,15 @@ def substitute(stack, bl):
         
         
 def evaluateNow(formula):
+    """
+    Evaluates a single logical operation with concrete values.
 
+    Args:
+        formula (list): A list containing the operator and operands [op, val1, val2].
+
+    Returns:
+        bool: The result of the operation.
+    """
     if formula[0] == '-':
         return lnot(formula[2])
     elif formula[0] == 'and':
@@ -220,6 +364,15 @@ def evaluateNow(formula):
         return liff(formula[1], formula[2])
     
 def evaluate(formula):
+    """
+    Recursively evaluates a formula structure.
+
+    Args:
+        formula (list): The parsed formula structure with values or nested structures.
+
+    Returns:
+        bool: The final result of the evaluation.
+    """
     if formula[0] == '-':
         if not isinstance(formula[2], list):
             return evaluateNow([formula[0], None, formula[2]])
@@ -236,13 +389,26 @@ def evaluate(formula):
             return evaluateNow([formula[0], evaluate(formula[1]), evaluate(formula[2])])
 
 class TruthTable:
+    """
+    A class to generate, store, and display truth tables.
+    """
     def __init__(self, vars, props):
+        """
+        Initializes the TruthTable.
+
+        Args:
+            vars (list): List of variable names.
+            props (list): List of proposition strings.
+        """
         self.vars = vars
         self.props = props
         self.table = []
         self.ttable()
             
     def ttable(self):
+        """
+        Generates the truth table data.
+        """
         stacks = []
         for i in self.props:
             stack = process(i)
@@ -262,7 +428,9 @@ class TruthTable:
             self.table.append([row, results])
             
     def display(self):
-        
+        """
+        Prints the truth table to the console.
+        """
         header = self.vars + self.props
         
         widths = []
@@ -295,6 +463,9 @@ class TruthTable:
             print()
 
     def latex(self):
+        """
+        Generates and prints the LaTeX code for the truth table.
+        """
         align = ((len(self.vars) + len(self.props) -1) * '|c') + '|c|';
         header = ""
         latexphrases = []
@@ -317,4 +488,3 @@ class TruthTable:
         rows = rows[:-1]
         command = "\\begin{tabular}{%s}\n\\hline\n%s\\\\\n\\hline\n%s\n\\hline\n\\end{tabular}" % (align, header, rows)
         print(command)
-

@@ -1,4 +1,22 @@
 # Compute first twelve Fibonacci numbers and put in array, then print
+#
+# Description:
+#   This MIPS assembly program calculates the first 12 Fibonacci numbers,
+#   stores them in an array, and then prints them to the console.
+#
+#   It uses a loop to compute the sequence iteratively:
+#   F[n+2] = F[n] + F[n+1]
+#
+#   Registers used:
+#   $t0 - Array address / Current element address
+#   $t5 - Array size
+#   $t2 - Temporary value for Fibonacci calculation
+#   $t1 - Loop counter
+#   $t3 - F[n]
+#   $t4 - F[n+1]
+#   $a0, $a1 - Arguments for system calls and function calls
+#   $v0 - System call code
+
       .data
 fibs: .word   0 : 13        # "array" of 12 words to contain fib values
 size: .word  13             # size of "array" 
@@ -25,6 +43,13 @@ loop: lw   $t3, 0($t0)      # Get value from array F[n]
       syscall               # we are out of here.
 		
 #########  routine to print the numbers on one line. 
+#
+# print:
+#   Iterates through an array of integers and prints them separated by spaces.
+#
+# Arguments:
+#   $a0 - Address of the array
+#   $a1 - Size of the array
 
       .data
 space:.asciiz  " "          # space to insert between numbers

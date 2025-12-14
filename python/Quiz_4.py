@@ -1,8 +1,21 @@
 import sqlite3
 from sqlite3 import Error
 
+"""
+This module provides functions to interact with a SQLite database for a product inventory system.
+It supports creating views, inserting PCs, updating printers, deleting laptops, and querying price ranges.
+"""
 
 def openConnection(_dbFile):
+    """
+    Opens a connection to the SQLite database.
+
+    Args:
+        _dbFile (str): The path to the database file.
+
+    Returns:
+        sqlite3.Connection: The connection object if successful, None otherwise.
+    """
     print("++++++++++++++++++++++++++++++++++")
     print("Open database: ", _dbFile)
 
@@ -19,6 +32,13 @@ def openConnection(_dbFile):
 
 
 def closeConnection(_conn, _dbFile):
+    """
+    Closes the database connection.
+
+    Args:
+        _conn (sqlite3.Connection): The connection object to close.
+        _dbFile (str): The name of the database file (for logging purposes).
+    """
     print("++++++++++++++++++++++++++++++++++")
     print("Close database: ", _dbFile)
 
@@ -32,6 +52,15 @@ def closeConnection(_conn, _dbFile):
 
 
 def createPriceRange(_conn):
+    """
+    Creates the PriceRange view in the database.
+
+    The view aggregates minimum and maximum prices for each maker and product type
+    across printers, PCs, and laptops.
+
+    Args:
+        _conn (sqlite3.Connection): The database connection object.
+    """
     print("++++++++++++++++++++++++++++++++++")
     print("Create PriceRange")
     cursor = _conn.cursor()
@@ -72,6 +101,12 @@ def createPriceRange(_conn):
 
 
 def printPriceRange(_conn):
+    """
+    Prints the content of the PriceRange view.
+
+    Args:
+        _conn (sqlite3.Connection): The database connection object.
+    """
     print("++++++++++++++++++++++++++++++++++")
     print("Print PriceRange")
 
@@ -93,6 +128,21 @@ def printPriceRange(_conn):
 
 
 def insertPC(_conn, _maker, _model, _speed, _ram, _hd, _price):
+    """
+    Inserts a new PC into the database, or updates if it exists.
+
+    It first deletes any existing entries with the given model from the PC and product tables,
+    then inserts the new records.
+
+    Args:
+        _conn (sqlite3.Connection): The database connection object.
+        _maker (str): The maker of the PC.
+        _model (int): The model number of the PC.
+        _speed (float): The speed of the PC.
+        _ram (int): The RAM of the PC.
+        _hd (int): The hard drive size of the PC.
+        _price (int): The price of the PC.
+    """
     print("++++++++++++++++++++++++++++++++++")
     l = 'Insert PC ({}, {}, {}, {}, {}, {})'.format(
         _maker, _model, _speed, _ram, _hd, _price)
@@ -115,11 +165,20 @@ def insertPC(_conn, _maker, _model, _speed, _ram, _hd, _price):
 
 
 def updatePrinter(_conn, _model, _price):
+    """
+    Updates the price of a printer in the database.
+
+    Args:
+        _conn (sqlite3.Connection): The database connection object.
+        _model (int): The model number of the printer.
+        _price (int): The new price of the printer.
+    """
     print("++++++++++++++++++++++++++++++++++")
     l = 'Update Printer ({}, {})'.format(_model, _price)
     print(l)
     cursor = _conn.cursor()
-    cursor.exucte(
+    # Fixed typo from original code: exucte -> execute
+    cursor.execute(
         'UPDATE printer SET price = {} WHERE model = {};'.format(_price, _model))
     _conn.commit()
 
@@ -127,6 +186,13 @@ def updatePrinter(_conn, _model, _price):
 
 
 def deleteLaptop(_conn, _model):
+    """
+    Deletes a laptop from the database.
+
+    Args:
+        _conn (sqlite3.Connection): The database connection object.
+        _model (int): The model number of the laptop to delete.
+    """
     print("++++++++++++++++++++++++++++++++++")
     l = 'Delete Laptop ({})'.format(_model)
     print(l)
@@ -139,6 +205,9 @@ def deleteLaptop(_conn, _model):
 
 
 def main():
+    """
+    Main function to execute the database operations based on input file instructions.
+    """
     database = "data.sqlite"
 
     # create a database connection
@@ -147,22 +216,25 @@ def main():
         createPriceRange(conn)
         printPriceRange(conn)
 
-        file = open('input.in', 'r')
-        lines = file.readlines()
-        for line in lines:
-            print(line.strip())
+        try:
+            file = open('input.in', 'r')
+            lines = file.readlines()
+            for line in lines:
+                print(line.strip())
 
-            tok = line.strip().split(' ')
-            if tok[0] == 'I':
-                insertPC(conn, tok[2], tok[3], tok[4], tok[5], tok[6], tok[7])
-            elif tok[0] == 'U':
-                updatePrinter(conn, tok[2], tok[3])
-            elif tok[0] == 'D':
-                deleteLaptop(conn, tok[2])
+                tok = line.strip().split(' ')
+                if tok[0] == 'I':
+                    insertPC(conn, tok[2], tok[3], tok[4], tok[5], tok[6], tok[7])
+                elif tok[0] == 'U':
+                    updatePrinter(conn, tok[2], tok[3])
+                elif tok[0] == 'D':
+                    deleteLaptop(conn, tok[2])
 
-            printPriceRange(conn)
+                printPriceRange(conn)
 
-        file.close()
+            file.close()
+        except FileNotFoundError:
+            print("input.in file not found.")
 
     closeConnection(conn, database)
 

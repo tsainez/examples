@@ -8,20 +8,37 @@
 // 	Anthony Sainez -- 16 October 2020
 //
 
+/**
+ * Implements an admissible heuristic function for pathfinding.
+ *
+ * This heuristic estimates the cost to the destination by calculating the
+ * straight-line distance divided by the maximum possible velocity in the map.
+ * This ensures the heuristic never overestimates the true cost (admissible).
+ */
 public class GoodHeuristic extends Heuristic {
+	/** The roadmap being searched. */
 	public RoadMap map;
+	/** The maximum velocity found on any road in the map. */
 	public double velocity;
 
-	// Constructor
+	/**
+	 * Constructor for GoodHeuristic.
+	 *
+	 * @param map The roadmap containing locations and roads.
+	 * @param destination The target destination for the search.
+	 */
 	public GoodHeuristic(RoadMap map, Location destination) {
 		this.map = map;
 		this.velocity = velocity();
 		super.setDestination(destination);
 	}
 
-	// heuristicValue -- Return the appropriate heuristic values for the
-	// given search tree node. Note that the given Node should not be
-	// modified within the body of this function.
+	/**
+	 * Calculates the heuristic value for a given node.
+	 *
+	 * @param thisNode The node to evaluate.
+	 * @return The estimated cost from the node to the destination.
+	 */
 	public double heuristicValue(Node thisNode) {
 		/*
 		// If you want to remove the timeCost function, you can do it this way, too.
@@ -37,8 +54,13 @@ public class GoodHeuristic extends Heuristic {
 		return (timeCost(thisNode.loc, destination) / velocity); // I'm a bigger fan of one-liners, though.
 	}
 
-	// Helps find the minimum cost route.
-	// "Want to preserve velocity."
+	/**
+	 * Calculates the maximum velocity across all roads in the map.
+	 *
+	 * Velocity is defined here as distance / cost.
+	 *
+	 * @return The maximum velocity.
+	 */
 	public double velocity() {
 		double temp, velocity = 0.0;
 
@@ -53,9 +75,13 @@ public class GoodHeuristic extends Heuristic {
 		return velocity;
 	}
 
-	// Time cost is also just the distance between two points on a graph.
-	// Math.hypot comes in useful here, since it just calculates the distance
-	// formula for us.
+	/**
+	 * Calculates the straight-line distance (Euclidean distance) between two locations.
+	 *
+	 * @param loc1 The first location.
+	 * @param loc2 The second location.
+	 * @return The distance between the two locations.
+	 */
 	public double timeCost(Location loc1, Location loc2) {
 		double x, y;
 

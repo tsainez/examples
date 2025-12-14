@@ -21,6 +21,13 @@
 
 using namespace std;
 
+/**
+ * Recursively prints the optimal parenthesization of the matrix chain product.
+ *
+ * @param s The split table computed by matrixChainOrder.
+ * @param i The starting matrix index.
+ * @param j The ending matrix index.
+ */
 void printMatrices(int** s, int i, int j) {
     if (i == j) {
         cout << "A" << i - 1;
@@ -32,6 +39,15 @@ void printMatrices(int** s, int i, int j) {
     }
 }
 
+/**
+ * Computes the optimal order of matrix chain multiplication.
+ *
+ * Uses dynamic programming to find the minimum number of scalar multiplications
+ * needed to compute the product of a chain of matrices.
+ *
+ * @param arr An array of dimensions where matrix A_i has dimensions arr[i-1] x arr[i].
+ * @param n The number of matrices.
+ */
 void matrixChainOrder(int arr[], int n) {
     int j, q;
     
@@ -72,6 +88,14 @@ void matrixChainOrder(int arr[], int n) {
     cout << endl;
 }
 
+/**
+ * Main function to solve the Matrix Chain Multiplication problem.
+ *
+ * Reads the number of matrices and their dimensions from stdin,
+ * then calculates and prints the minimum cost and optimal parenthesization.
+ *
+ * @return 0 on success.
+ */
 int main() {
     int n;
     

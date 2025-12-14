@@ -8,6 +8,16 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+/**
+ * Main function to execute the FizzBuzz logic.
+ *
+ * Iterates from 0 to 32.
+ * Prints "Fizz! <number>" if the number is divisible by 3.
+ * Prints "Buzz! <number>" if the number is divisible by 5.
+ * Note: This implementation prioritizes 3 over 5 and doesn't handle multiples of 15 specially (FizzBuzz).
+ *
+ * @return 0 on success.
+ */
 int main(void) {
     for(int i = 0; i <= 32; i++) {
         if (i % 3 == 0) {

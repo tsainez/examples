@@ -43,18 +43,31 @@
 import javax.swing.*;
 import java.util.*;
 
-
+/**
+ * Implements a backward chaining inference engine.
+ *
+ * This class processes queries against a knowledge base consisting of facts and rules.
+ * It uses a depth-first search strategy to prove goals by unifying them with known facts
+ * or by chaining through rules.
+ */
 public class BackwardChain {
 
+    /** The knowledge base containing facts and rules. */
     public KnowledgeBase kb;
 
-	// Default constructor ...
+	/**
+	 * Default constructor. Initializes an empty knowledge base.
+	 */
 	public BackwardChain() {
 		this.kb = new KnowledgeBase();
 	}
 
-	// initKB -- Initialize the knowledge base by interactively requesting
-	// file names and reading those files. Return false on error.
+	/**
+	 * Initialize the knowledge base by interactively requesting
+	 * file names and reading those files.
+	 *
+	 * @return true if initialization was successful, false otherwise.
+	 */
 	public boolean initKB() {
 		return (kb.readKB());
 	}
@@ -63,9 +76,14 @@ public class BackwardChain {
 	// Do not modify this comment or anything above it, with the
 	// exception of the file header comment.
 
-	// unifyCC -- Return the most general unifier for the two provided
-	// constants, or null if no unification is possible. The argument
-	// binding list may be assumed to have been freshly allocated.
+	/**
+	 * Return the most general unifier for the two provided constants, or null if no unification is possible.
+	 *
+	 * @param t1 The first constant term.
+	 * @param t2 The second constant term.
+	 * @param bl The current binding list (freshly allocated).
+	 * @return The binding list if unification succeeds, null otherwise.
+	 */
 	BindingList unifyCC(Term t1, Term t2, BindingList bl) {
 
 	    // PLACE STUDENT SOLUTION CODE HERE
@@ -76,10 +94,14 @@ public class BackwardChain {
 		// I also used this online resource: http://www.cs.trincoll.edu/~ram/cpsc352/notes/unification.html
 	}
 	
-	// unifyCV -- Return the most general unifier for the two provided
-	// terms, a constant and a variable, or null if no unification is
-	// possible. The argument binding list may be assumed to have been
-	// freshly allocated.
+	/**
+	 * Return the most general unifier for a constant and a variable, or null if no unification is possible.
+	 *
+	 * @param t1 The constant term.
+	 * @param t2 The variable term.
+	 * @param bl The current binding list (freshly allocated).
+	 * @return The binding list if unification succeeds, null otherwise.
+	 */
 	BindingList unifyCV(Term t1, Term t2, BindingList bl) {
 
 	    // PLACE STUDENT SOLUTION CODE HERE
@@ -88,10 +110,14 @@ public class BackwardChain {
 		return unifyVC(t2, t1, bl);
 	}
 	
-	// unifyCF -- Return the most general unifier for the two provided
-	// terms, a constant and a function, or null if no unification is
-	// possible. The argument binding list may be assumed to have been
-	// freshly allocated.
+	/**
+	 * Return the most general unifier for a constant and a function, or null if no unification is possible.
+	 *
+	 * @param t1 The constant term.
+	 * @param t2 The function term.
+	 * @param bl The current binding list (freshly allocated).
+	 * @return The binding list if unification succeeds, null otherwise.
+	 */
 	BindingList unifyCF(Term t1, Term t2, BindingList bl) {
 
 	    // PLACE STUDENT SOLUTION CODE HERE
@@ -100,10 +126,14 @@ public class BackwardChain {
 		return null;
 	}
 
-	// unifyVC -- Return the most general unifier for the two provided
-	// terms, a variable and a constant, or null if no unification is
-	// possible. The argument binding list may be assumed to have been
-	// freshly allocated.
+	/**
+	 * Return the most general unifier for a variable and a constant, or null if no unification is possible.
+	 *
+	 * @param t1 The variable term.
+	 * @param t2 The constant term.
+	 * @param bl The current binding list (freshly allocated).
+	 * @return The binding list if unification succeeds, null otherwise.
+	 */
 	BindingList unifyVC(Term t1, Term t2, BindingList bl) {
 
 	    // PLACE STUDENT SOLUTION CODE HERE
@@ -119,9 +149,14 @@ public class BackwardChain {
 		}
 	}
 	
-	// unifyVV -- Return the most general unifier for the two provided
-	// variables, or null if no unification is possible. The argument
-	// binding list may be assumed to have been freshly allocated.
+	/**
+	 * Return the most general unifier for two variables, or null if no unification is possible.
+	 *
+	 * @param t1 The first variable term.
+	 * @param t2 The second variable term.
+	 * @param bl The current binding list (freshly allocated).
+	 * @return The binding list if unification succeeds, null otherwise.
+	 */
 	BindingList unifyVV(Term t1, Term t2, BindingList bl) {
 
 	    // PLACE STUDENT SOLUTION CODE HERE
@@ -149,10 +184,14 @@ public class BackwardChain {
 		return bl;
 	}
 	
-	// unifyVF -- Return the most general unifier for the two provided
-	// terms, a variable and a function, or null if no unification is
-	// possible. The argument binding list may be assumed to have been
-	// freshly allocated.
+	/**
+	 * Return the most general unifier for a variable and a function, or null if no unification is possible.
+	 *
+	 * @param t1 The variable term.
+	 * @param t2 The function term.
+	 * @param bl The current binding list (freshly allocated).
+	 * @return The binding list if unification succeeds, null otherwise.
+	 */
 	BindingList unifyVF(Term t1, Term t2, BindingList bl) {
 
 	    // PLACE STUDENT SOLUTION CODE HERE
@@ -167,10 +206,14 @@ public class BackwardChain {
 		}
 	}
 	
-	// unifyFC -- Return the most general unifier for the two provided
-	// terms, a function and a constant, or null if no unification is
-	// possible. The argument binding list may be assumed to have been
-	// freshly allocated.
+	/**
+	 * Return the most general unifier for a function and a constant, or null if no unification is possible.
+	 *
+	 * @param t1 The function term.
+	 * @param t2 The constant term.
+	 * @param bl The current binding list (freshly allocated).
+	 * @return The binding list if unification succeeds, null otherwise.
+	 */
 	BindingList unifyFC(Term t1, Term t2, BindingList bl) {
 
 	    // PLACE STUDENT SOLUTION CODE HERE
@@ -179,10 +222,14 @@ public class BackwardChain {
 		return null;
 	}
 	
-	// unifyFV -- Return the most general unifier for the two provided
-	// terms, a function and a variable, or null if no unification is
-	// possible. The argument binding list may be assumed to have been
-	// freshly allocated.
+	/**
+	 * Return the most general unifier for a function and a variable, or null if no unification is possible.
+	 *
+	 * @param t1 The function term.
+	 * @param t2 The variable term.
+	 * @param bl The current binding list (freshly allocated).
+	 * @return The binding list if unification succeeds, null otherwise.
+	 */
 	BindingList unifyFV(Term t1, Term t2, BindingList bl) {
 
 		// PLACE STUDENT SOLUTION CODE HERE
@@ -190,10 +237,14 @@ public class BackwardChain {
 		return unifyVF(t2, t1, bl);
 	}
 	
-	// unifyFF -- Return the most general unifier for the two provided
-	// terms, both functions, or null if no unification is possible.
-	// The argument binding list may be assumed to have been freshly
-	// allocated.
+	/**
+	 * Return the most general unifier for two functions, or null if no unification is possible.
+	 *
+	 * @param t1 The first function term.
+	 * @param t2 The second function term.
+	 * @param bl The current binding list (freshly allocated).
+	 * @return The binding list if unification succeeds, null otherwise.
+	 */
 	BindingList unifyFF(Term t1, Term t2, BindingList bl) {
 
 	    // PLACE STUDENT SOLUTION CODE HERE
@@ -203,9 +254,14 @@ public class BackwardChain {
 	// END STUDENT SOLUTION CODE SECTION
 	// Do not modify this comment or anything below it.
 	
-	// unify -- Return the most general unifier for the two provided terms,
-	// or null if no unification is possible. The returned binding list
-	// should be freshly allocated.
+	/**
+	 * Return the most general unifier for the two provided terms.
+	 *
+	 * @param t1 The first term.
+	 * @param t2 The second term.
+	 * @param bl The current binding list.
+	 * @return The binding list if unification succeeds, null otherwise. The returned binding list is freshly allocated.
+	 */
 	public BindingList unify(Term t1, Term t2, BindingList bl) {
 		BindingList newBL = new BindingList(bl);
 		if (t1.isConstant()) {
@@ -245,9 +301,14 @@ public class BackwardChain {
 		return (null);
 	}
 
-	// unify -- Return the most general unifier for the two provided literals,
-	// or null if no unification is possible. The returned binding list
-	// should be freshly allocated.
+	/**
+	 * Return the most general unifier for the two provided literals.
+	 *
+	 * @param lit1 The first literal.
+	 * @param lit2 The second literal.
+	 * @param bl The current binding list.
+	 * @return The binding list if unification succeeds, null otherwise. The returned binding list is freshly allocated.
+	 */
 	public BindingList unify(Literal lit1, Literal lit2, BindingList bl) {
 		if (!(lit1.pred.equals(lit2.pred))) {
 			// Different predicates, so no match ...
@@ -257,9 +318,14 @@ public class BackwardChain {
 		return (unify(lit1.args, lit2.args, bl));
 	}
 		
-	// unify -- Return the most general unifier for the two provided lists of
-	// terms, or null if no unification is possible. The returned binding list
-	// should be freshly allocated.
+	/**
+	 * Return the most general unifier for the two provided functions.
+	 *
+	 * @param f1 The first function.
+	 * @param f2 The second function.
+	 * @param bl The current binding list.
+	 * @return The binding list if unification succeeds, null otherwise. The returned binding list is freshly allocated.
+	 */
 	public BindingList unify(Function f1, Function f2, BindingList bl) {
 		if (!(f1.func.equals(f2.func))) {
 			// Different function names, so no match ...
@@ -269,9 +335,14 @@ public class BackwardChain {
 		return (unify(f1.args, f2.args, bl));
 	}
 
-	// unify -- Return the most general unifier for the two provided lists of
-	// terms, or null if no unification is possible. The returned binding
-	// list should be freshly allocated.
+	/**
+	 * Return the most general unifier for the two provided lists of terms.
+	 *
+	 * @param ts1 The first list of terms.
+	 * @param ts2 The second list of terms.
+	 * @param bl The current binding list.
+	 * @return The binding list if unification succeeds, null otherwise. The returned binding list is freshly allocated.
+	 */
 	public BindingList unify(List<Term> ts1, List<Term> ts2, BindingList bl) {
 		if (bl == null)
 			return (null);
@@ -294,11 +365,13 @@ public class BackwardChain {
 		return (unify(terms1, terms2, unify(t1, t2, bl)));
 	}
 
-	// askFacts -- Examine all of the facts in the knowledge base to
-	// determine if any of them unify with the given literal, under the
-	// given binding list. If a unification is found, return the
-	// corresponding most general unifier. If none is found, return null
-	// to indicate failure.
+	/**
+	 * Examine all of the facts in the knowledge base to determine if any of them unify with the given literal.
+	 *
+	 * @param lit The goal literal.
+	 * @param bl The current binding list.
+	 * @return The binding list if unification succeeds, null otherwise.
+	 */
 	BindingList askFacts(Literal lit, BindingList bl) {
 		BindingList mgu = null; // Most General Unifier
 		for (Literal fact : kb.facts) {
@@ -309,20 +382,23 @@ public class BackwardChain {
 		return (null);
 	}
 
-	// askFacts -- Examine all of the facts in the knowledge base to
-	// determine if any of them unify with the given literal. If a
-	// unification is found, return the corresponding most general unifier.
-	// If none is found, return null to indicate failure.
+	/**
+	 * Examine all of the facts in the knowledge base to determine if any of them unify with the given literal.
+	 *
+	 * @param lit The goal literal.
+	 * @return The binding list if unification succeeds, null otherwise.
+	 */
 	BindingList askFacts(Literal lit) {
 		return (askFacts(lit, new BindingList()));
 	}
 
-	// ask -- Try to prove the given goal literal, under the constraints of
-	// the given binding list, using both the list of known facts and the
-	// collection of known rules. Terminate as soon as a proof is found,
-	// returning the resulting binding list for that proof. Return null if
-	// no proof can be found. The returned binding list should be freshly
-	// allocated.
+	/**
+	 * Try to prove the given goal literal using facts and rules.
+	 *
+	 * @param goal The goal literal to prove.
+	 * @param bl The current binding list.
+	 * @return The binding list if the goal is proven, null otherwise. The returned binding list is freshly allocated.
+	 */
 	BindingList ask(Literal goal, BindingList bl) {
 		BindingList result = askFacts(goal, bl);
 		if (result != null) {
@@ -354,21 +430,23 @@ public class BackwardChain {
 		return (null);
 	}
 
-	// ask -- Try to prove the given goal literal using both the list of
-	// known facts and the collection of known rules. Terminate as soon as
-	// a proof is found, returning the resulting binding list for that proof.
-	// Return null if no proof can be found. The returned binding list
-	// should be freshly allocated.
+	/**
+	 * Try to prove the given goal literal using facts and rules.
+	 *
+	 * @param goal The goal literal to prove.
+	 * @return The binding list if the goal is proven, null otherwise. The returned binding list is freshly allocated.
+	 */
 	BindingList ask(Literal goal) {
 		return (ask(goal, new BindingList()));
 	}
 
-	// ask -- Try to prove the given list of goal literals, under the
-	// constraints of the given binding list, using both the list of known
-	// facts and the collection of known rules. Terminate as soon as a proof
-	// is found, returning the resulting binding list for that proof. Return
-	// null if no proof can be found. The returned binding list should be
-	// freshly allocated.
+	/**
+	 * Try to prove the given list of goal literals.
+	 *
+	 * @param goals The list of goal literals.
+	 * @param bl The current binding list.
+	 * @return The binding list if all goals are proven, null otherwise. The returned binding list is freshly allocated.
+	 */
 	BindingList ask(List<Literal> goals, BindingList bl) {
 		if (goals.size() == 0) {
 			// All goals have been satisfied ...
@@ -390,4 +468,3 @@ public class BackwardChain {
 	}
 
 }
-

@@ -8,21 +8,40 @@
 
 import java.util.*;
 
+/**
+ * Represents a layer of neurons in a neural network.
+ *
+ * This class handles the activation of units, calculation of deltas (errors),
+ * and updating of bias weights. It supports input, hidden, and output layers.
+ */
 public class Layer {
 
-	public int n; // number of units in the layer
-	public double min; // minimum activation level
-	public double max; // maximum activation level
-	public Vector net; // net input levels of units
-	public Vector act; // activation levels of units
-	public Vector targ; // current target for output layers
-	public Vector delta; // unit delta values
-	public Vector bias; // unit bias weights
-	public Vector biasDelta; // bias weight delta values
-	public List<Projection> inputs; // projections into this layer
-	public List<Projection> outputs; // projections out of this layer
+	/** The number of units (neurons) in the layer. */
+	public int n;
+	/** The minimum activation level. */
+	public double min;
+	/** The maximum activation level. */
+	public double max;
+	/** The net input levels of the units. */
+	public Vector net;
+	/** The activation levels of the units. */
+	public Vector act;
+	/** The current target values for output layers. */
+	public Vector targ;
+	/** The delta values (error terms) for the units. */
+	public Vector delta;
+	/** The bias weights for the units. */
+	public Vector bias;
+	/** The accumulated delta values for the bias weights. */
+	public Vector biasDelta;
+	/** The list of projections feeding into this layer. */
+	public List<Projection> inputs;
+	/** The list of projections emanating from this layer. */
+	public List<Projection> outputs;
 
-	// Default constructor ...
+	/**
+	 * Default constructor. Initializes an invalid layer.
+	 */
 	public Layer() {
 		this.n = -1;
 		this.min = 0.0;
@@ -37,7 +56,13 @@ public class Layer {
 		this.outputs = new LinkedList<Projection>();
 	}
 
-	// Constructor with size and activation range specified ...
+	/**
+	 * Constructor with specified size and activation range.
+	 *
+	 * @param size The number of units in the layer.
+	 * @param min The minimum activation value.
+	 * @param max The maximum activation value.
+	 */
 	public Layer(int size, double min, double max) {
 		if ((size > 0) && (min < max)) {
 			this.n = size;
@@ -66,14 +91,22 @@ public class Layer {
 		}
 	}
 
-	// Constructor with size specified ...
+	/**
+	 * Constructor with specified size and default activation range (0.0 to 1.0).
+	 *
+	 * @param size The number of units in the layer.
+	 */
 	public Layer(int size) {
 		this(size, 0.0, 1.0);
 	}
 
-	// resize -- Change the size of this layer. Activation and delta values
-	// may be lost in this process. All input and output projections are
-	// discarded.
+	/**
+	 * Change the size of this layer.
+	 *
+	 * Activation and delta values may be lost. All input and output projections are discarded.
+	 *
+	 * @param size The new number of units.
+	 */
 	public void resize(int size) {
 		if (size > 0) {
 			n = size;
@@ -98,8 +131,12 @@ public class Layer {
 		}
 	}
 
-	// setActivationRange -- Change the minimum and maximum activation
-	// values for the units in this layer.
+	/**
+	 * Change the minimum and maximum activation values for the units in this layer.
+	 *
+	 * @param min The new minimum activation value.
+	 * @param max The new maximum activation value.
+	 */
 	public void setActivationRange(double min, double max) {
 		if (min < max) {
 			this.min = min;
@@ -107,8 +144,11 @@ public class Layer {
 		}
 	}
 
-	// addInputProjection -- Add the given projection to the list of
-	// projections coming into this layer.
+	/**
+	 * Add a projection to the list of inputs coming into this layer.
+	 *
+	 * @param p The projection to add.
+	 */
 	public void addInputProjection(Projection p) {
 		if (p.outputN == n) {
 			inputs.add(p);
@@ -116,8 +156,11 @@ public class Layer {
 		}
 	}
 
-	// addOutputProjection -- Add the given projection to the list of
-	// projections coming out of this layer.
+	/**
+	 * Add a projection to the list of outputs coming out of this layer.
+	 *
+	 * @param p The projection to add.
+	 */
 	public void addOutputProjection(Projection p) {
 		if (p.inputN == n) {
 			outputs.add(p);
@@ -125,39 +168,54 @@ public class Layer {
 		}
 	}
 
-	// clearNetInputs -- Set all net input values in the layer to zero.
+	/**
+	 * Set all net input values in the layer to zero.
+	 */
 	public void clearNetInputs() {
 		for (int i = 0; i < net.dim(); i++)
 			net.set(i, 0.0);
 	}
 
-	// clearActivation -- Set all activation values in the layer to zero.
+	/**
+	 * Set all activation values in the layer to zero.
+	 */
 	public void clearActivation() {
 		for (int i = 0; i < act.dim(); i++)
 			act.set(i, 0.0);
 	}
 
-	// clearUnitDeltas -- Set all unit delta values in the layer to zero.
+	/**
+	 * Set all unit delta values in the layer to zero.
+	 */
 	public void clearUnitDeltas() {
 		for (int i = 0; i < delta.dim(); i++)
 			delta.set(i, 0.0);
 	}
 
-	// clearBiasDeltas -- Set all bias weight deltas in the layer to zero.
+	/**
+	 * Set all bias weight deltas in the layer to zero.
+	 */
 	public void clearBiasDeltas() {
 		for (int i = 0; i < biasDelta.dim(); i++)
 			biasDelta.set(i, 0.0);
 	}
 
-	// randomizeBiases -- Set the bias weights to random values sampled
-	// uniformly from the given range.
+	/**
+	 * Set the bias weights to random values sampled uniformly from the given range.
+	 *
+	 * @param min The minimum random value.
+	 * @param max The maximum random value.
+	 */
 	public void randomizeBiases(double min, double max) {
 		bias.randomize(min, max);
 	}
 
-	// loadInput -- Load the given vector of values into the activation
-	// vector for this layer. This allows this layer to act as an input
-	// layer. Return false on error.
+	/**
+	 * Load the given vector of values into the activation vector for this layer.
+	 *
+	 * @param v The vector of input values.
+	 * @return true if successful, false otherwise.
+	 */
 	public boolean loadInput(Vector v) {
 		if (act.valid() && v.valid() && (act.dim() == v.dim())) {
 			for (int i = 0; i < act.dim(); i++)
@@ -169,10 +227,12 @@ public class Layer {
 		}
 	}
 
-	// loadTarget -- Load the given vector of values into the target vector
-	// for this layer. Specifically, just direct the target reference for
-	// this layer to the given vector, allocating no new storage. This
-	// allows this layer to act as an output layer. Return false on error.
+	/**
+	 * Load the given vector of values into the target vector for this layer.
+	 *
+	 * @param v The vector of target values.
+	 * @return true if successful, false otherwise.
+	 */
 	public boolean loadTarget(Vector v) {
 		if (act.valid() && v.valid() && (act.dim() == v.dim())) {
 			targ = v;
@@ -183,8 +243,9 @@ public class Layer {
 		}
 	}
 
-	// computeActivation -- Calculate the activation values of the units in
-	// this layer based on their inputs and bias weights.
+	/**
+	 * Calculate the activation values of the units in this layer based on their inputs and bias weights.
+	 */
 	public void computeActivation() {
 		if (!(inputs.isEmpty())) {
 			// This is not an input layer, so we can update it ...
@@ -197,8 +258,9 @@ public class Layer {
 		}
 	}
 
-	// computeOutputDelta -- Calculate the unit delta values for this
-	// output layer.
+	/**
+	 * Calculate the unit delta values for this output layer.
+	 */
 	public void computeOutputDelta() {
 
 		// PLACE YOUR CODE HERE ...
@@ -223,8 +285,9 @@ public class Layer {
 		return; // Standard procedure for void functions.
 	}
 
-	// computeHiddenDelta -- Calculate the unit delta values for this hidden
-	// layer.
+	/**
+	 * Calculate the unit delta values for this hidden layer.
+	 */
 	public void computeHiddenDelta() {
 
 		// PLACE YOUR CODE HERE ...
@@ -254,7 +317,11 @@ public class Layer {
 		return; // Standard procedure for void functions.
 	}
 
-	// computeDelta -- Calculate the unit delta values for this layer.
+	/**
+	 * Calculate the unit delta values for this layer.
+	 *
+	 * Dispatches to computeOutputDelta or computeHiddenDelta based on layer type.
+	 */
 	public void computeDelta() {
 		if (outputs.isEmpty()) {
 			// This is an output layer ...
@@ -269,16 +336,18 @@ public class Layer {
 		}
 	}
 
-	// incrementBiasDeltas -- Update how much the bias weights should
-	// change, as a function of the current unit delta values. Note that
-	// this increments the current bias weight delta values, allowing
-	// multiple weight changes to be "summed up". Note also that these
-	// weight delta values are prior to the application of the learning rate.
+	/**
+	 * Update the accumulated bias deltas based on current unit deltas.
+	 */
 	public void incrementBiasDeltas() {
 		biasDelta = biasDelta.sum(delta);
 	}
 
-	// updateBiases -- Update the bias weights.
+	/**
+	 * Update the bias weights using the accumulated deltas and a learning rate.
+	 *
+	 * @param learningRate The learning rate factor.
+	 */
 	public void updateBiases(double learningRate) {
 		bias = bias.sum(biasDelta.multiplyByScalar(learningRate));
 	}

@@ -1,21 +1,34 @@
 function [m, b] = hough_transform(edge_map)
-    
+    % HOUGH_TRANSFORM Performs the Hough Transform to detect lines in an edge map.
+    %
+    %   [m, b] = HOUGH_TRANSFORM(edge_map) takes a binary edge map image as input
+    %   and returns the slope (m) and y-intercept (b) of the most prominent line
+    %   detected in the image.
+    %
+    %   Inputs:
+    %       edge_map - A binary matrix representing the edge map of an image,
+    %                  where non-zero values indicate edge pixels.
+    %
+    %   Outputs:
+    %       m - The slope of the detected line.
+    %       b - The y-intercept of the detected line.
+
     %% find x, y position from edge map
     [edge_y, edge_x] = find(edge_map);
-    
+
     %% range of b
     H = size(edge_map, 1);
     b_range = -H : 1 : H;
-    
+
     %% range of m
     m_step = 0.01;
     m_max = 5;
     m_min = -m_max;
     m_range = m_min : m_step : m_max;
-    
+
     %% create vote matrix
     V = zeros(length(m_range), length(b_range));
-    
+
     %% TODO: add votes
 %     V(1, 1) = 1; % remove this line
     for i = 1:length(edge_y)
@@ -32,17 +45,16 @@ function [m, b] = hough_transform(edge_map)
             end
         end
     end
-    
-    
+
+
 
     %% visualize votes
-%     figure, imagesc(V); xlabel('b'); ylabel('m'); 
-    
-    
+%     figure, imagesc(V); xlabel('b'); ylabel('m');
+
+
     %% find the maximal vote
     max_vote = max(V(:));
     [max_m_index, max_b_index] = find( V == max_vote );
     m = m_range(max_m_index);
     b = b_range(max_b_index);
-
 end
