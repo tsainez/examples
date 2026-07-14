@@ -2,10 +2,18 @@
      $userName = $_POST["uName"];
      $password = $_POST["myPassword"];
 
-     $pdo = new PDO('mysql:host=192.168.64.2;db=lab10', 'lab10', 'lab10');
+     $host = getenv('DB_HOST');
+     $db = getenv('DB_NAME');
+     $user = getenv('DB_USER');
+     $pass = getenv('DB_PASS');
 
-     $queryString = "INSERT INTO 'users' ('username', 'password') VALUES ('".$userName."','".$password."')";
+     $pdo = new PDO("mysql:host=$host;dbname=$db", $user, $pass);
+
+     $queryString = "INSERT INTO users (username, password) VALUES (:username, :password)";
 
      $result = $pdo->prepare($queryString);
-     $result->execute();
+     $result->execute([
+         ':username' => $userName,
+         ':password' => $password
+     ]);
 ?>
