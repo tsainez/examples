@@ -64,8 +64,11 @@
 		public function save_User() {
 			$this->connect_to_database();
 
-			# not bullet-proof
-			$this->run_query("INSERT INTO users (fname, lname, email) VALUES ('".$this->firstName."', '".$this->lastName"', '".$this->email."')");
+			# bullet-proof using prepared statements
+			$this->run_query(
+				"INSERT INTO users (fname, lname, email) VALUES (?, ?, ?)",
+				[$this->firstName, $this->lastName, $this->email]
+			);
 		}
 	}
 

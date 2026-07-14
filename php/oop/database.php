@@ -24,10 +24,10 @@ class database {
 
 	}
 
-	public function run_query($queryString) {
+	public function run_query($queryString, $params = []) {
 		$output = $this->connection->prepare($queryString);
 	
-		$output->execute();
+		$output->execute($params);
 	}
 }
 
