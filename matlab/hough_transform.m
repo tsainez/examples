@@ -29,8 +29,6 @@ function [m, b] = hough_transform(edge_map)
     %% create vote matrix
     V = zeros(length(m_range), length(b_range));
 
-    %% TODO: add votes
-%     V(1, 1) = 1; % remove this line
     for i = 1:length(edge_y)
         x = edge_x(i);
         y = edge_y(i);
@@ -40,7 +38,7 @@ function [m, b] = hough_transform(edge_map)
             if m_min <= m
                 if m <= m_max
                     m_index = round((m - m_min) / m_step) + 1;
-                    V(m_index, b_index) = V(m_index, b_index) + 1;
+                    V(m_index, b_index) = V(m_index, b_index) + 1; % add votes
                 end
             end
         end
