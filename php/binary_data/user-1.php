@@ -1,6 +1,6 @@
 <?php
 public function saveUserDatav2() {
-	parent::connect_to_database("localhost", "barreto", "sTovok0r", "movieCollection");
+	parent::connect_to_database(getenv('DB_HOST') ?: "localhost", getenv('DB_USER'), getenv('DB_PASS'), getenv('DB_NAME'));
 	$queryStr = "INSERT INTO 'users'('userID', 'fname', 'lname', 'pic')"."VALUES (NULL, '".$this->fname."', '".$this->lname."', '".$this->profilePic."')";
 	echo $queryStr;
 	$result = parent::executeQuery($queryStr);
@@ -16,7 +16,7 @@ public function saveUserDatav2() {
 }
 
 public function getRecordById($myid) {
-	parent::connect_to_database("localhost", "barreto", "sTovok0r", "movieCollection");
+	parent::connect_to_database(getenv('DB_HOST') ?: "localhost", getenv('DB_USER'), getenv('DB_PASS'), getenv('DB_NAME'));
 	$queryStr = "SELECT * FROM 'users' WHERE 'userID' = ".$myid;
 	parent::executeQuery($queryStr);
 	$profileInfo = parent::getResultSet();
