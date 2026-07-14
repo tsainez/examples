@@ -48,7 +48,6 @@ imwrite(imresize(x_rec, 4), sprintf('reconstruct_k%d.jpg', k));
 
 %% encode all training data
 fprintf('Convert training data to coef...\n');
-%coef_train = zeros(k, n_train); % TODO: compute coef_train for all training images
 coef_train = U'*Y;
 
 
