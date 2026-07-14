@@ -29,15 +29,20 @@
      */
 
      $pdo = new PDO('mysql:host=192.168.64.2;db=lab10', 'lab10', 'lab10');
-     $queryString = "SELECT * FROM users WHERE username = '".$userName."'";
 
+     // Use prepared statements to prevent SQL injection
+     $queryString = "SELECT * FROM users WHERE username = :username";
      $result = $pdo->prepare($queryString);
+     $result->bindParam(':username', $userName);
      $result->execute();
+
      $validUser = False;
 
-     for ($i=0; $row = $result->fetch(); $i++) {
-          if ($row['password'] === $password) {
+     while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
+          // Verify password using password_verify instead of plaintext comparison
+          if (password_verify($password, $row['password'])) {
                $validUser = True;
+               break; // Password matched, no need to keep checking
           }
      }
 
