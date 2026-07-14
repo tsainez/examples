@@ -29,10 +29,10 @@
      */
 
      $pdo = new PDO('mysql:host=192.168.64.2;db=lab10', 'lab10', 'lab10');
-     $queryString = "SELECT * FROM users WHERE username = '".$userName."'";
+     $queryString = "SELECT * FROM users WHERE username = :username";
 
      $result = $pdo->prepare($queryString);
-     $result->execute();
+     $result->execute([':username' => $userName]);
      $validUser = False;
 
      for ($i=0; $row = $result->fetch(); $i++) {
