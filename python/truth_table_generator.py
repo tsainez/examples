@@ -18,6 +18,9 @@ def generate(vars):
     Returns:
         list: A list of lists, where each inner list represents a row of truth values (0 or 1).
     """
+    if not vars:
+        return [[]]
+
     values = [0, 1]
     command = ""
     count = 0
