@@ -52,3 +52,4 @@ c/.idea/c.iml
 /dataSources/
 /dataSources.local.xml
 /httpRequests/
+__pycache__/
