@@ -19,8 +19,6 @@ function [r, theta] = hough_transform_polar(edge_map)
     %% create vote matrix
     V = zeros(length(r_range), length(theta_range));
     
-    %% TODO: add votes
-%     V(1, 1) = 1; % remove this line
     for i = 1:length(edge_y)
         x = edge_x(i);
         y = edge_y(i);
