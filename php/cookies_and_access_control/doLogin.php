@@ -28,11 +28,16 @@
      }
      */
 
-     $pdo = new PDO('mysql:host=192.168.64.2;db=lab10', 'lab10', 'lab10');
-     $queryString = "SELECT * FROM users WHERE username = '".$userName."'";
+     $dbHost = getenv('DB_HOST') ?: '127.0.0.1';
+     $dbName = getenv('DB_NAME') ?: 'lab10';
+     $dbUser = getenv('DB_USER');
+     $dbPass = getenv('DB_PASS');
+
+     $pdo = new PDO("mysql:host=$dbHost;dbname=$dbName", $dbUser, $dbPass);
+     $queryString = "SELECT * FROM users WHERE username = :username";
 
      $result = $pdo->prepare($queryString);
-     $result->execute();
+     $result->execute(['username' => $userName]);
      $validUser = False;
 
      for ($i=0; $row = $result->fetch(); $i++) {
