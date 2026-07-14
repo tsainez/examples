@@ -1,26 +1,38 @@
 function [r, theta] = hough_transform_polar(edge_map)
+    % HOUGH_TRANSFORM_POLAR Performs the Hough Transform to detect lines using polar coordinates.
+    %
+    %   [r, theta] = HOUGH_TRANSFORM_POLAR(edge_map) takes a binary edge map image as input
+    %   and returns the distance from the origin (r) and angle (theta) of the most prominent line
+    %   detected in the image.
+    %
+    %   Inputs:
+    %       edge_map - A binary matrix representing the edge map of an image,
+    %                  where non-zero values indicate edge pixels.
+    %
+    %   Outputs:
+    %       r - The distance from the origin to the detected line.
+    %       theta - The angle of the normal to the detected line.
 
     %% find x, y position from edge map
     [edge_y, edge_x] = find(edge_map);
-    
+
     %% range of r
     H = size(edge_map, 1);
     W = size(edge_map, 2);
-    
+
     r_max = round(sqrt(H^2 + W^2));
     r_min = -r_max;
     r_step = 1;
     r_range = r_min : r_step : r_max;
-    
+
     %% range of theta
     theta_step = 0.01;
     theta_range = -pi/2 : theta_step : pi/2;
-    
+
     %% create vote matrix
     V = zeros(length(r_range), length(theta_range));
-    
-    %% TODO: add votes
-%     V(1, 1) = 1; % remove this line
+
+    %% add votes
     for i = 1:length(edge_y)
         x = edge_x(i);
         y = edge_y(i);
@@ -35,12 +47,12 @@ function [r, theta] = hough_transform_polar(edge_map)
             end
         end
     end
-    
-    
+
+
 
     %% visualize votes
 %     figure, imagesc(V); xlabel('theta'); ylabel('r');
-    
+
     %% find the maximal vote
     max_vote = max(V(:));
     [max_r_index, max_theta_index] = find( V == max_vote );
