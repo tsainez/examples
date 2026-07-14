@@ -25,7 +25,7 @@ public function getRecordById($myid) {
 	$this->lname = $profileInfo['lname'];
 	$this->profilePic = $profileInfo['pic'];
 	$this->email = $profileInfo['email'];
-	$this->password = crypt($profileInfo['password'],"sdjeyrfgdb4334");
+	$this->password = password_hash($profileInfo['password'], PASSWORD_DEFAULT);
 	parent::disconnect_from_database();
 }
 
