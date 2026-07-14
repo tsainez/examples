@@ -17,7 +17,8 @@ public function saveUserDatav2() {
 
 public function getRecordById($myid) {
 	parent::connect_to_database("localhost", "barreto", "sTovok0r", "movieCollection");
-	$queryStr = "SELECT * FROM 'users' WHERE 'userID' = ".$myid;
+	$safeId = (int)$myid;
+	$queryStr = "SELECT * FROM 'users' WHERE 'userID' = ".$safeId;
 	parent::executeQuery($queryStr);
 	$profileInfo = parent::getResultSet();
 	$this->userid = $profileInfo['userID'];
