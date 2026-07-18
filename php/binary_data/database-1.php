@@ -8,7 +8,11 @@
 
 	try {
 
-		$pdo = new PDO('mysql:host=192.168.64.2;dbname=inventory', 'inventory', '123');
+		$db_host = getenv('DB_HOST') ?: '192.168.64.2';
+		$db_name = getenv('DB_NAME') ?: 'inventory';
+		$db_user = getenv('DB_USER');
+		$db_pass = getenv('DB_PASS');
+		$pdo = new PDO("mysql:host=$db_host;dbname=$db_name", (string)$db_user, (string)$db_pass);
 
 		$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
@@ -28,7 +32,11 @@
 	*/
 
 	try {
-		$pdo = new PDO('mysql:host=localhost;dbname=binaryData', 'xxxx', 'xxxx');
+		$db_host = getenv('DB_HOST') ?: 'localhost';
+		$db_name = getenv('DB_NAME') ?: 'binaryData';
+		$db_user = getenv('DB_USER');
+		$db_pass = getenv('DB_PASS');
+		$pdo = new PDO("mysql:host=$db_host;dbname=$db_name", (string)$db_user, (string)$db_pass);
 		$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 		$pdo->exec('SET NAMES "utf8"');
 	} catch (PDOException $e) {
