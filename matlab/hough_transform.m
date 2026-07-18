@@ -29,8 +29,6 @@ function [m, b] = hough_transform(edge_map)
     %% create vote matrix
     V = zeros(length(m_range), length(b_range));
 
-    %% TODO: add votes
-%     V(1, 1) = 1; % remove this line
     for i = 1:length(edge_y)
         x = edge_x(i);
         y = edge_y(i);
