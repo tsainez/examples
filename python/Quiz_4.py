@@ -149,16 +149,17 @@ def insertPC(_conn, _maker, _model, _speed, _ram, _hd, _price):
     print(l)
     cursor = _conn.cursor()
 
-    cursor.execute('DELETE FROM pc WHERE model = {};'.format(_model))
+    cursor.execute('DELETE FROM pc WHERE model = ?;', (_model,))
 
-    cursor.execute('DELETE FROM product WHERE model = {};'.format(_model))
+    cursor.execute('DELETE FROM product WHERE model = ?;', (_model,))
 
     cursor.execute(
-        'INSERT INTO pc(model, speed, ram, hd, price) VALUES(\'{}\', {}, {}, {}, {});'.format(
-            _model, _speed, _ram, _hd, _price))
+        'INSERT INTO pc(model, speed, ram, hd, price) VALUES(?, ?, ?, ?, ?);',
+        (_model, _speed, _ram, _hd, _price)
+    )
 
-    cursor.execute('INSERT INTO product(maker, model, TYPE) VALUES(\'{}\', {}, \'{}\');'.format(
-        _maker, _model, 'PC'))
+    cursor.execute('INSERT INTO product(maker, model, TYPE) VALUES(?, ?, ?);',
+        (_maker, _model, 'PC'))
 
     _conn.commit()
     print("++++++++++++++++++++++++++++++++++")
@@ -179,7 +180,7 @@ def updatePrinter(_conn, _model, _price):
     cursor = _conn.cursor()
     # Fixed typo from original code: exucte -> execute
     cursor.execute(
-        'UPDATE printer SET price = {} WHERE model = {};'.format(_price, _model))
+        'UPDATE printer SET price = ? WHERE model = ?;', (_price, _model))
     _conn.commit()
 
     print("++++++++++++++++++++++++++++++++++")
@@ -198,7 +199,7 @@ def deleteLaptop(_conn, _model):
     print(l)
 
     cursor = _conn.cursor()
-    cursor.execute('DELETE FROM laptop WHERE model = {}'.format(_model))
+    cursor.execute('DELETE FROM laptop WHERE model = ?', (_model,))
     _conn.commit()
 
     print("++++++++++++++++++++++++++++++++++")
