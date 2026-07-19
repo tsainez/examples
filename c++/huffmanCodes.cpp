@@ -46,7 +46,7 @@ struct Min {
     }
 };
 
-void printBits(int* b, int location, int tmp) {
+void printBits(const vector<int>& b, int location, int tmp) {
     globalBits.push_back(-1);   // '-1' is a placeholder, see below
                                 // The algorithm actively searches for '-1' tokens
     globalBits.push_back(tmp);
@@ -55,7 +55,7 @@ void printBits(int* b, int location, int tmp) {
         globalBits.push_back(b[i]);
 }
 
-void traverse(Node* root, int* arr, int location) {
+void traverse(Node* root, vector<int>& arr, int location) {
     // This function places 0 or 1 into the array depending on if you are
     // travelling left or right on the tree, and will print out the binary
     // code if the node is a leaf.
@@ -80,7 +80,7 @@ void traverse(Node* root, int* arr, int location) {
     }
 }
 
-Node* huffmanEncode(int* arr, int n) {
+Node* huffmanEncode(const vector<int>& arr, int n) {
     priority_queue<Node*, vector<Node*>, Min> minPriorityQueue;
     
     for(int i = 0; i < n; i++)
@@ -109,11 +109,7 @@ int main() {
     int n;
     cin >> n;
     
-    // You cannot declare the array in any other way,
-    // for some reason it causes a segfault or it will
-    // simply not yield the correct test results. Not sure
-    // as to why this is the case. Really odd bug.
-    int arr[n];
+    vector<int> arr(n);
     int counter = 0;
     
     for(int i = 0; i < n; i++) {
@@ -121,17 +117,8 @@ int main() {
         counter++;
     }
     
-    int size = sizeof(arr) / sizeof(arr[0]);
-    
-    /*
-    if (size != n) {
-        cout << "Something went wrong. Dying!";
-        return 0;
-    }
-    */
-    
     Node* root = huffmanEncode(arr, n);
-    int bits[n];
+    vector<int> bits(n);
     int leaf = 0;
     
     // We gotta fill the tree, so we traverse it.
@@ -153,7 +140,7 @@ int main() {
         // Now we can ascertain to where the exact match is.
         match = distance(globalBits.begin(), it) + 1;
         
-        for(int j = match; j < globalBits.size(); j++) {
+        for(size_t j = match; j < globalBits.size(); j++) {
             if(globalBits[j] == -1) {
                 end = j;
                 globalBits.erase(globalBits.begin() + match - 2,
