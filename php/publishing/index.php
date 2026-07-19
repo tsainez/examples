@@ -1,8 +1,12 @@
 <?php
 
 	try {
+	     $dbHost = getenv('DB_HOST') ?: 'localhost';
+	     $dbName = getenv('DB_NAME') ?: 'ijdb';
+	     $dbUser = getenv('DB_USER') !== false ? getenv('DB_USER') : 'ijdb';
+	     $dbPass = getenv('DB_PASS') !== false ? getenv('DB_PASS') : '';
 
-	     $pdo = new PDO('mysql:host=localhost;dbname=ijdb', 'ijdb', 'mypassword');
+	     $pdo = new PDO("mysql:host=$dbHost;dbname=$dbName", $dbUser, $dbPass);
 
 	     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
