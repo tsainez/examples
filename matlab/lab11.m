@@ -64,8 +64,7 @@ for i = 1:n_test
     img_test = face_testing(:, :, i);
     
     %% convert testing image to feature vector
-    img_test = img_test(:) - x_bar;
-    coef_test = U' * img_test; % TODO: replace this line
+    coef_test = U' * (img_test(:) - x_bar);
     
     error = zeros(n_train, 1);
     for j = 1:n_train
