@@ -66,7 +66,10 @@ void radixSort(vector<vector<int>> arr) {
     // solves things well.
     for(int i = 0; i < arr.size(); i++){
         for (int j = 0; j < arr[i].size(); j++){
-            cout << arr[i][j] << ";";
+            cout << arr[i][j];
+            if (j < arr[i].size() - 1) {
+                cout << ";";
+            }
         }
         cout << endl;
     }
