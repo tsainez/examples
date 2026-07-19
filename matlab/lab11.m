@@ -33,7 +33,6 @@ x = face_training(:, :, 1);
 figure(1), 
 subplot(1, 2, 1); imshow(imresize(x, 4)); title('input');
 
-% TODO: compute coef
 x = x(:);
 coef = U' * (x - x_bar);
 
