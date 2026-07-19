@@ -18,9 +18,21 @@
 		# commented it out because we don't actually want it to be fatal
 	}
 
-	echo "<pre>";
-	var_dump($results->fetchAll(PDO::FETCH_ASSOC));
-	echo "</pre>";
+	if (isset($results) && $results) {
+		$users = $results->fetchAll(PDO::FETCH_ASSOC);
+		echo "<ul>\n";
+		foreach ($users as $user) {
+			echo "<li>\n";
+			foreach ($user as $key => $value) {
+				if (stripos($key, 'password') !== false) {
+					continue; // Skip sensitive fields
+				}
+				echo htmlspecialchars($key) . ": " . htmlspecialchars((string)$value) . "<br>\n";
+			}
+			echo "</li>\n";
+		}
+		echo "</ul>\n";
+	}
 
 	include 'footer.php';
 
